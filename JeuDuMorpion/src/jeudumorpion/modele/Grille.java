@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Grille {
     private Case cases[][] = new Case[3][3];
-    private ArrayList caseslibre = new ArrayList<Case>(); // cases libre
-    private ArrayList casesCoche = new ArrayList<Case>(); // cases coché
+    private ArrayList<Case> caseslibre = new ArrayList<Case>(); // cases libre
+    private ArrayList<Case> casesCoche = new ArrayList<Case>(); // cases coché
     
     
     
@@ -33,8 +33,10 @@ public class Grille {
         this.caseslibre.remove(coche);
     }
     public void reset(){
+        int x=0;
         for(int i=0; i<casesCoche.size();i++){
-          //  this.casesCoche.get(i).
+           x=this.casesCoche.get(i).getNumCase();
+           this.caseslibre.add(x, this.casesCoche.get(i));
         }
     } 
     //mettre tout les cas possible pour voir si il y a un gagnant
