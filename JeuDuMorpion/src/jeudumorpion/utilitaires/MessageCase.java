@@ -10,13 +10,13 @@ package jeudumorpion.utilitaires;
  * @author mirasl
  */
 public class MessageCase extends Message{
-    private Integer y;
-    private Integer x;
+    private final Integer y;
+    private final Integer x;
     
     public MessageCase(Actions action, int y,int x){
         super(action);
-        this.setY(y);
-        this.setX(x);
+        this.y=y;
+        this.x=x;
     }
 
     public MessageCase(int col, int row, Actions actions) {
@@ -31,24 +31,10 @@ public class MessageCase extends Message{
     }
 
     /**
-     * @param y the y to set
-     */
-    public void setY(Integer y) {
-        this.y = y;
-    }
-
-    /**
      * @return the x
      */
     public Integer getX() {
         return x;
     }
 
-    /**
-     * @param x the x to set
-     */
-    public void setX(Integer x) {
-        this.x = x;
-    }
-    
 }
