@@ -17,7 +17,7 @@ import javax.swing.JComponent;
  *
  * @author rose
  */
-public class VueSpecification {
+public class VueSpecification extends Observable{
         private JFrame window;
         private JButton sombre;
         private JButton colore;
