@@ -13,10 +13,7 @@ import javax.swing.*;
 import java.awt.color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jeudumorpion.modele.Joueur;
-import jeudumorpion.utilitaires.Actions;
-import jeudumorpion.utilitaires.MessageCase;
-
+import jeudumorpion.utilitaires.*;
 /**
  *
  * @author chapellr
@@ -27,8 +24,8 @@ public class VueGrille extends Observable{
     private final int borderWidth = 1;
     private final int rows = 3;
     private final int cols = 3;
-    private Joueur a;
-    private Joueur b;
+    //private Joueur a;
+    //private Joueur b;
     
     public VueGrille(){
         //Création de la fenêtre + séparation en différent layout
@@ -78,12 +75,13 @@ public class VueGrille extends Observable{
                         // Top left corner, draw all sides
                         panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                         JButton btnCase = new JButton("COCHER");
+                        int x = row;
+                        int y = col;
                         btnCase.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent arg0) {
-                                MessageCase m = new MessageCase(col, row, Actions.COCHER_CASE);
                                 setChanged();
-                                notifyObservers(m);
+                                notifyObservers(new MessageCase(Actions.COCHER_CASE, y, x));
                                 clearChanged();
                             }
                         });
