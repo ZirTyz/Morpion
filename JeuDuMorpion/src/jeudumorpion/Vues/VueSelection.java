@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
  *
  * @author mirasl
  */
-public class VueSelection {
+public class VueSelection extends Observable{
 
     private final JFrame window;
     private final JButton btnNewPartie;

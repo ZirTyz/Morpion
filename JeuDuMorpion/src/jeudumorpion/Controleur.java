@@ -14,6 +14,8 @@ import java.util.Observer;
 import jeudumorpion.Vues.VueSelection;
 import jeudumorpion.Vues.VueSpecification;
 import jeudumorpion.modele.Grille;
+import jeudumorpion.utilitaires.Message;
+import jeudumorpion.utilitaires.Actions;
 
 /**
  *
@@ -27,15 +29,23 @@ public class Controleur implements Observer{
    private VueSpecification vueSpe;
    
    public Controleur(){
-       vueGrille=new VueGrille(); //A enlever
+       vueGrille=new VueGrille(); //A enlever et mettre dans le update
        vueGrille.afficher();
        vueSelection=new VueSelection();
-       //vueSelection.afficher();
-       vueSpe = new VueSpecification();
+       vueSelection.afficher();
+       //vueSpe = new VueSpecification();
        //vueSpe.afficher();
    }
     @Override
-    public void update(Observable arg0, Object arg1) {
+    public void update(Observable arg0, Object arg) {
+        if (arg instanceof Message){
+            Message message = (Message) arg;
+            if (((Message) arg).getAction()== Actions.NEWPARTIE){
+                vueSpe = new VueSpecification();
+                vueSpe.afficher();
+                vueSpe.addObserver(this);
+            }
+        }
         
     }
    
