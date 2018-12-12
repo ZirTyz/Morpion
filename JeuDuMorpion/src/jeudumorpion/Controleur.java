@@ -45,6 +45,9 @@ public class Controleur implements Observer{
                 vueSpe.afficher();
                 //vueSpe.addObserver(this);
             }
+            if(((Message) arg).getAction()== Actions.TABLEAU){
+//                vueTab = new VueTableau();
+            }
         }
         
     }
