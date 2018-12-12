@@ -65,16 +65,22 @@ public class VueGrille extends Observable{
         
         
         //Cases du morpion
+        
+        
+        
+        
+        
         panelMorp.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 JPanel panelCase = new JPanel();
-                panelCase.setPreferredSize(new Dimension(150,100));
-                if (row == 0) {
-                    if (col == 0) {
-                        // Top left corner, draw all sides
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
-                        JButton btnCase = new JButton("COCHER");
+
+                JButton btnCase = new JButton();
+                btnCase.setPreferredSize(new Dimension(150,100));
+                btnCase.setBorderPainted(false);
+                //btnCase.setOpaque(false);
+                //btnCase.setContentAreaFilled(false);
+                
                         int x = row;
                         int y = col;
                         btnCase.addActionListener(new ActionListener() {
@@ -85,9 +91,16 @@ public class VueGrille extends Observable{
                                 clearChanged();
                             }
                         });
+                        panelCase.add(btnCase);
+                if (row == 0) {
+                    if (col == 0) {
+                        // Top left corner, draw all sides
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        
                     }
                     else if (col == cols-1){
                         panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, 0, Color.BLACK));
+                        
                     }
                     else {
                         // Top edge, draw all sides except left edge
