@@ -15,6 +15,7 @@ public enum Actions {
     TUTO,
     CREATION,
     STYLE,
-    NBJOUEUR;
+    NBJOUEUR,
+    COCHER_CASE;
     
 }

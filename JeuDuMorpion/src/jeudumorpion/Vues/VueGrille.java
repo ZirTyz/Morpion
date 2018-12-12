@@ -11,7 +11,11 @@ import java.util.Observable;
 import java.util.HashMap;
 import javax.swing.*;
 import java.awt.color.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import jeudumorpion.modele.Joueur;
+import jeudumorpion.utilitaires.Actions;
+import jeudumorpion.utilitaires.MessageCase;
 
 /**
  *
@@ -67,49 +71,58 @@ public class VueGrille extends Observable{
         panelMorp.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                final JLabel label = new JLabel("");
-                label.setPreferredSize(new Dimension(150,100));
+                JPanel panelCase = new JPanel();
+                panelCase.setPreferredSize(new Dimension(150,100));
                 if (row == 0) {
                     if (col == 0) {
                         // Top left corner, draw all sides
-                        label.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
-                        
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        JButton btnCase = new JButton("COCHER");
+                        btnCase.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent arg0) {
+                                MessageCase m = new MessageCase(col, row, Actions.COCHER_CASE);
+                                setChanged();
+                                notifyObservers(m);
+                                clearChanged();
+                            }
+                        });
                     }
                     else if (col == cols-1){
-                        label.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, 0, Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, 0, Color.BLACK));
                     }
                     else {
                         // Top edge, draw all sides except left edge
-                        label.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                     }
                 }
                 else if (row == rows -1){
                     if (col == 0){
-                        label.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
                     }
                     else if (col == cols -1){
-                        label.setBorder(BorderFactory.createMatteBorder(0,0, 0,0,Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,0,Color.BLACK));
                     }
                     else {
-                        label.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
                     }
                         
                     }
                 else {
                     if (col == 0) {
                         // Left-hand edge, draw all sides except top
-                        label.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, borderWidth,Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, borderWidth,Color.BLACK));
                     }
                     else if (col == cols-1){
-                        label.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, 0,Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, 0,Color.BLACK));
                     }
                     
                     else {
                         // Neither top edge nor left edge, skip both top and left lines
-                        label.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                     }
                 }
-                panelMorp.add(label);
+                panelMorp.add(panelCase);
 
                 
                 

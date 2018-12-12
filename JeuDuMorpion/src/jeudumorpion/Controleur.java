@@ -43,7 +43,7 @@ public class Controleur implements Observer{
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
                 vueSpe = new VueSpecification();
                 vueSpe.afficher();
-                vueSpe.addObserver(this);
+                //vueSpe.addObserver(this);
             }
         }
         
