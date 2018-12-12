@@ -27,12 +27,12 @@ public class Controleur implements Observer{
    private VueSpecification vueSpe;
    
    public Controleur(){
-       vueGrille=new VueGrille();
-       //vueGrille.afficher();
+       vueGrille=new VueGrille(); //A enlever
+       vueGrille.afficher();
        vueSelection=new VueSelection();
        //vueSelection.afficher();
        vueSpe = new VueSpecification();
-       vueSpe.afficher();
+       //vueSpe.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg1) {
