@@ -49,6 +49,13 @@ public class Controleur implements Observer{
 //                vueTab = new VueTableau();
             }
         }
+        /*
+        faire le close pour tout fermer
+        faire les different Action pour tout les radio bouton des choix du nombre de perso
+        faire le cochage de case dans la grille du Morpion
+        Faire un quitter
+        Et regarder tout les boutons à faire.
+        */
         
     }
    
