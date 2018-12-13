@@ -56,6 +56,7 @@ public class Controleur implements Observer{
         if (arg instanceof MessageCreation){
             if(((MessageCreation) arg).getAction()== Actions.VALIDER_NBJOUEUR){ // creer une grille de la bonne taille vu le nombre de joueur
                 //vueCreationJoueur = new vueCrationJoueur(arg.getNbJoeur);
+//                Ajoute tout les joueurs dans l'arraylist
                 
 //                puis après création de la grille avec tout de bon
 
@@ -64,6 +65,7 @@ public class Controleur implements Observer{
 //                vueCration.afficher
 //                vueGrille=new VueGrille(((MessageCreation) arg).getNbJoueur()); 
 //                vueGrille.afficher();
+//                vueGrille.addObserver(this);
 //            }
                 
             }
