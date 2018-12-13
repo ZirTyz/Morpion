@@ -11,5 +11,7 @@ package jeudumorpion.modele;
  */
 public enum Signe {
     X,
-    O;
+    O,
+    NULL;
+    
 }

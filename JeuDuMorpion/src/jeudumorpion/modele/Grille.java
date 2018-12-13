@@ -39,10 +39,13 @@ public class Grille {
            this.caseslibre.add(x, this.casesCoche.get(i));
         }
     } 
+    public Case getCase(int x, int y){
+        return this.cases[x][y];
+    }
     //mettre tout les cas possible pour voir si il y a un gagnant
     public Signe Gagnant(Signe s){
-        if (this.cases[1][1].getJoueurAyantCoché().equals(s)){            
-            if(s.equals(this.cases[0][0].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][2].getJoueurAyantCoché().getSigne())){ // diagonal haut gauche
+        if (this.cases[1][1].getJoueurAyantCoché().equals(s)){   // changer en getEtat_case !!          
+            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[2][2].getJoueurAyantCoché().getSigne())){ // diagonal haut gauche
                 return s;  
             }
             else if(s.equals(this.cases[0][2].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][0].getJoueurAyantCoché().getSigne())){ // diagonal haut droite

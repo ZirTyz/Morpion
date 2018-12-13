@@ -71,5 +71,8 @@ public class VueSelection extends Observable{
     public void afficher() {
         this.window.setVisible(true);
     }
+//    public void close(){
+//        this.window.setDefaultCloseOperation(javax.swing.JFrame.E);
+//    }
     
 }

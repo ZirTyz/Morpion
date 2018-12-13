@@ -15,6 +15,7 @@ public class Case {
 
     private int numCase;
     private Joueur joueurAyantCoché;
+    private Signe etat_case = Signe.NULL;
     
     public Case(int c){
         this.numCase= c;
@@ -51,5 +52,19 @@ public class Case {
      */
     public void setNumCase(int numCase) {
         this.numCase = numCase;
+    }
+
+    /**
+     * @return the etat_case
+     */
+    public Signe getEtat_case() {
+        return etat_case;
+    }
+
+    /**
+     * @param etat_case the etat_case to set
+     */
+    public void setEtat_case(Signe etat_case) {
+        this.etat_case = etat_case;
     }
 }

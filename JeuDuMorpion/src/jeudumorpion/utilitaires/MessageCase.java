@@ -5,6 +5,8 @@
  */
 package jeudumorpion.utilitaires;
 
+import jeudumorpion.modele.Joueur;
+
 /**
  *
  * @author mirasl
@@ -12,11 +14,12 @@ package jeudumorpion.utilitaires;
 public class MessageCase extends Message{
     private final Integer y;
     private final Integer x;
-    
-    public MessageCase(Actions action, int y,int x){
+//    private final Joueur joueurCourant;
+    public MessageCase(Actions action, int y,int x/*,Joueur joueur*/){
         super(action);
         this.y=y;
         this.x=x;
+//        this.joueurCourant=joueur;
     }
 
 

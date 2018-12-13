@@ -16,6 +16,7 @@ public enum Actions {
     CREATION,
     STYLE,
     NBJOUEUR,
-    COCHER_CASE;
+    COCHER_CASE,
+    VALIDER_NBJOUEUR;
     
 }

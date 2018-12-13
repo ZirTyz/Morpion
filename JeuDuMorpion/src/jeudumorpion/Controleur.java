@@ -14,23 +14,26 @@ import java.util.Observer;
 import jeudumorpion.Vues.VueSelection;
 import jeudumorpion.Vues.VueSpecification;
 import jeudumorpion.modele.Grille;
+import jeudumorpion.modele.Signe;
 import jeudumorpion.utilitaires.Message;
 import jeudumorpion.utilitaires.Actions;
-
+import jeudumorpion.utilitaires.MessageCase;
+import jeudumorpion.utilitaires.MessageCreation;
+import java.util.ArrayList;
 /**
  *
  * @author chapellr
  */
 public class Controleur implements Observer{
    //private Grille grille = new Grille();
-   private Joueur joueurs;
+   private ArrayList<Joueur> joueurs = new ArrayList<>();
    private VueGrille vueGrille;
    private VueSelection vueSelection;
    private VueSpecification vueSpe;
+   private Grille grille;
    
    public Controleur(){
-       vueGrille=new VueGrille(); //A enlever et mettre dans le update
-       vueGrille.afficher();
+       
        vueSelection=new VueSelection();
        vueSelection.afficher();
        //vueSpe = new VueSpecification();
@@ -48,11 +51,36 @@ public class Controleur implements Observer{
             if(((Message) arg).getAction()== Actions.TABLEAU){
 //                vueTab = new VueTableau();
             }
+            
+        }
+        if (arg instanceof MessageCreation){
+            if(((MessageCreation) arg).getAction()== Actions.VALIDER_NBJOUEUR){ // creer une grille de la bonne taille vu le nombre de joueur
+                //vueCreationJoueur = new vueCrationJoueur(arg.getNbJoeur);
+                
+//                puis après création de la grille avec tout de bon
+
+//          if(((MessageCreation) arg.getAction()==Actions.VALIDER_CRÉATION_PARTIE){
+
+//                vueCration.afficher
+//                vueGrille=new VueGrille(((MessageCreation) arg).getNbJoueur()); 
+//                vueGrille.afficher();
+//            }
+                
+            }
+        }
+        if (arg instanceof MessageCase){
+            if(((MessageCase) arg).getAction()==Actions.COCHER_CASE){
+                int x =((MessageCase) arg).getX();
+                int y =((MessageCase) arg).getY();
+                /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
+//                this.grille.getCase(x, y).setEtat_case();
+                this.grille.addCaseCoché(this.grille.getCase(x, y));
+            }
         }
         /*
         faire le close pour tout fermer
         faire les different Action pour tout les radio bouton des choix du nombre de perso
-        faire le cochage de case dans la grille du Morpion
+        
         Faire un quitter
         Et regarder tout les boutons à faire.
         */
