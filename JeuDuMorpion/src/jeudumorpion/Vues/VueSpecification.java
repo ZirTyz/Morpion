@@ -139,18 +139,25 @@ public class VueSpecification extends Observable{
         selectNbJoueurs.add(new JLabel(""));
         
         
-        
+        JPanel panelFooter = new JPanel(new GridLayout(1,7));
+        mainPanel.add(panelFooter, BorderLayout.SOUTH);
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
         JButton btnValider = new JButton("Valider");
-        panelBas.add(btnValider, BorderLayout.NORTH);
+        panelFooter.add(btnValider, BorderLayout.CENTER);
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setChanged();
                 notifyObservers(joueurs.getSelection().getActionCommand());
-                System.out.println(joueurs.getSelection().getActionCommand());
                 clearChanged();
             }
         });
+        
 
 }
         
