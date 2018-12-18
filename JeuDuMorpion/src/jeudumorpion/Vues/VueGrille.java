@@ -49,6 +49,12 @@ public class VueGrille extends Observable{
         labelTitre.setFont(new Font("Princetown LET", Font.PLAIN, (int) (labelTitre.getFont().getSize() * 2.5)));
         panelHaut.add(labelTitre, BorderLayout.CENTER) ;
         
+        JButton retour = new JButton("Retour");
+        panelHaut.add(retour, BorderLayout.WEST);
+        retour.setContentAreaFilled(false);
+        retour.setOpaque(false);
+        retour.setBorderPainted(false);
+        
         
         //Marge autour des cases du morpion
         JPanel marges = new JPanel(new BorderLayout());
@@ -74,13 +80,13 @@ public class VueGrille extends Observable{
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 JPanel panelCase = new JPanel();
-
+                panelCase.setOpaque(false);
                 JButton btnCase = new JButton();
                 btnCase.setPreferredSize(new Dimension(150,100));
                 btnCase.setBorderPainted(false);
                 //btnCase.setOpaque(false);
                 //btnCase.setContentAreaFilled(false);
-                
+               
                         int x = row;
                         int y = col;
                         btnCase.addActionListener(new ActionListener() {

@@ -10,6 +10,8 @@ import java.util.Observable;
 import java.util.HashMap;
 import javax.swing.*;
 import java.awt.color.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.JComponent;
@@ -85,12 +87,19 @@ public class VueSpecification extends Observable{
         
         joueurs = new ButtonGroup();
         joueurs.add(two);
+        two.setActionCommand("2");
         joueurs.add(three);
+        three.setActionCommand("3");
         joueurs.add(four);
+        four.setActionCommand("4");
         joueurs.add(five);
+        five.setActionCommand("5");
         joueurs.add(six);
+        six.setActionCommand("6");
         joueurs.add(seven);
+        seven.setActionCommand("7");
         joueurs.add(eight);
+        eight.setActionCommand("8");
         
         panelBas.add(two);
         panelBas.add(three);
@@ -113,6 +122,7 @@ public class VueSpecification extends Observable{
         
         selectNbJoueurs.add(contientdeux);
         selectNbJoueurs.add(two);
+        two.setSelected(true);
         selectNbJoueurs.add(new JLabel(""));
         selectNbJoueurs.add(five);
         selectNbJoueurs.add(new JLabel(""));
@@ -127,6 +137,20 @@ public class VueSpecification extends Observable{
         selectNbJoueurs.add(new JLabel(""));        
         selectNbJoueurs.add(eight);
         selectNbJoueurs.add(new JLabel(""));
+        
+        
+        
+        JButton btnValider = new JButton("Valider");
+        panelBas.add(btnValider, BorderLayout.NORTH);
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(joueurs.getSelection().getActionCommand());
+                System.out.println(joueurs.getSelection().getActionCommand());
+                clearChanged();
+            }
+        });
 
 }
         

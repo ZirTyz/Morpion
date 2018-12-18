@@ -34,10 +34,12 @@ public class Controleur implements Observer{
    
    public Controleur(){
        
-       vueSelection=new VueSelection();
-       vueSelection.afficher();
-       //vueSpe = new VueSpecification();
-       //vueSpe.afficher();
+       //vueSelection=new VueSelection();
+       //vueSelection.afficher();
+       vueGrille = new VueGrille();
+       vueGrille.afficher();
+       vueSpe = new VueSpecification();
+       vueSpe.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {
