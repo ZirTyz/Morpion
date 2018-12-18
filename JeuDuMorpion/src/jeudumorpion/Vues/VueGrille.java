@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import jeudumorpion.modele.Joueur;
 import jeudumorpion.utilitaires.*;
 /**
  *
@@ -24,10 +25,8 @@ public class VueGrille extends Observable{
     private final int borderWidth = 1;
     private final int rows = 3;
     private final int cols = 3;
-    //private Joueur a;
-    //private Joueur b;
     
-    public VueGrille(){
+    public VueGrille(Joueur a, Joueur b){
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -154,8 +153,8 @@ public class VueGrille extends Observable{
         JPanel indicationJoueur = new JPanel(new BorderLayout());
         panelDroite.add(indicationJoueur, BorderLayout.NORTH);
         
-        //JLabel affrontement = new JLabel(a.getPseudo() + " contre joueur " + b.getPseudo());
-        //indicationJoueur.add(affrontement);
+        JLabel affrontement = new JLabel(a.getPseudo() + " contre joueur " + b.getPseudo());
+        indicationJoueur.add(affrontement);
         
                 
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);

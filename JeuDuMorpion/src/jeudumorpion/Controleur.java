@@ -20,6 +20,7 @@ import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.MessageCase;
 import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
+import jeudumorpion.Vues.popUpPartie;
 /**
  *
  * @author chapellr
@@ -36,7 +37,9 @@ public class Controleur implements Observer{
        
        //vueSelection=new VueSelection();
        //vueSelection.afficher();
-       vueGrille = new VueGrille();
+       Joueur a = new Joueur("Jacques");
+       Joueur b = new Joueur("Frnaklin");
+       vueGrille = new VueGrille(a, b);
        vueGrille.afficher();
        vueSpe = new VueSpecification();
        vueSpe.afficher();

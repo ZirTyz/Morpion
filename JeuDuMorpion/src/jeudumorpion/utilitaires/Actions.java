@@ -17,6 +17,9 @@ public enum Actions {
     STYLE,
     NBJOUEUR,
     COCHER_CASE,
-    VALIDER_NBJOUEUR;
+    VALIDER_NBJOUEUR,
+    TOUR_SUIVANT,
+    RETOUR,
+    NOUVEAUX_TOURNOI;
     
 }

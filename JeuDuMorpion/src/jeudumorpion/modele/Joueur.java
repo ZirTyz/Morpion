@@ -14,9 +14,10 @@ public class Joueur {
     private Signe signe;
     private String pseudo;
     
-    public Joueur(){
+    public Joueur(String pseudo){
         this.casesCochée = null;
         this.signe = null;
+        this.pseudo = pseudo;
     }
 
     
