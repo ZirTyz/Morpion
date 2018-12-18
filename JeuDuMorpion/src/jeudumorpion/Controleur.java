@@ -40,11 +40,11 @@ public class Controleur implements Observer{
        Joueur a = new Joueur("Jacques");
        Joueur b = new Joueur("Frnaklin");
        vueGrille = new VueGrille(a, b);
-       vueGrille.afficher();
+       //vueGrille.afficher();
        vueSpe = new VueSpecification();
-       vueSpe.afficher();
+       //vueSpe.afficher();
        popUpPartie pp = new popUpPartie(a);
-       pp.afficher();
+       //pp.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {
