@@ -6,15 +6,18 @@
 package jeudumorpion.Vues;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import static java.awt.SystemColor.window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import jeudumorpion.modele.Joueur;
 import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.Message;
@@ -32,8 +35,9 @@ public class popUpPartie extends Observable{
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
+    frame.setUndecorated(true);
+    mainPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
     frame.add(mainPanel);
-    
     JLabel nmGagnant = new JLabel("Le gagnant de la partie est : " + j.getPseudo(), JLabel.CENTER);
     
     mainPanel.add(nmGagnant, BorderLayout.CENTER);

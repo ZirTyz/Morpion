@@ -43,6 +43,8 @@ public class Controleur implements Observer{
        vueGrille.afficher();
        vueSpe = new VueSpecification();
        vueSpe.afficher();
+       popUpPartie pp = new popUpPartie(a);
+       pp.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {

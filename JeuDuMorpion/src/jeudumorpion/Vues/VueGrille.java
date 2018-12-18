@@ -22,7 +22,7 @@ import jeudumorpion.utilitaires.*;
 public class VueGrille extends Observable{
     private HashMap<Integer,ICase> iCases = new HashMap();
     private JFrame window;
-    private final int borderWidth = 1;
+    private final int borderWidth = 4;
     private final int rows = 3;
     private final int cols = 3;
     

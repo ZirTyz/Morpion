@@ -6,11 +6,13 @@
 package jeudumorpion.Vues;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import static java.awt.SystemColor.window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +35,8 @@ public class popUpTournois extends Observable{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
     frame.add(mainPanel);
+    frame.setUndecorated(true);
+    mainPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
     
     JLabel nmGagnant = new JLabel("Le gagnant du tournois est : " + j.getPseudo(), JLabel.CENTER);
     
