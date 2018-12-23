@@ -33,7 +33,7 @@ public class Controleur implements Observer{
    private VueGrille vueGrille;
    private VueSelection vueSelection;
    private VueSpecification vueSpe;
-   private Grille grille;
+   private Grille grille = new Grille();
    private int nbCaseCoche=0;
    private Joueur joueurCourant;
    private popUpPartie victoire;

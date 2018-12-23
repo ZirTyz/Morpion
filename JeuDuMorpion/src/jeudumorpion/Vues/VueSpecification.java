@@ -15,14 +15,16 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.JComponent;
+import jeudumorpion.utilitaires.Actions;
+import jeudumorpion.utilitaires.MessageCreation;
 /**
  *
  * @author rose
  */
 public class VueSpecification extends Observable{
         private JFrame window;
-        private JButton sombre;
-        private JButton colore;
+//        private JButton sombre;
+//        private JButton colore;
         private ButtonGroup joueurs;
         private JRadioButton two;
         private JRadioButton three;
@@ -44,28 +46,28 @@ public class VueSpecification extends Observable{
         window.add(mainPanel) ;
         
         //Première partie de la fenêtre
-        JPanel panelHaut = new JPanel(new GridLayout(5,10)) ;
-        mainPanel.add(panelHaut, BorderLayout.NORTH);
-        sombre = new JButton("Sombre");
-        colore = new JButton("Colore");
-
-        for(int x =0; x<50;x++){
-            if (x==33){
-                panelHaut.add(new JLabel("Style ", JLabel.RIGHT));
-            }
-            else if(x==34){
-                panelHaut.add(new JLabel("graphique", JLabel.LEFT));             
-            }
-            else if(x==35){
-                panelHaut.add(sombre);                
-            }
-            else if(x==36){
-                panelHaut.add(colore);                
-            }
-            else {
-                panelHaut.add(new JLabel(""));
-            }
-        }
+//        JPanel panelHaut = new JPanel(new GridLayout(5,10)) ;
+//        mainPanel.add(panelHaut, BorderLayout.NORTH);
+//        sombre = new JButton("Sombre");
+//        colore = new JButton("Colore");
+//
+//        for(int x =0; x<50;x++){
+//            if (x==33){
+//                panelHaut.add(new JLabel("Style ", JLabel.RIGHT));
+//            }
+//            else if(x==34){
+//                panelHaut.add(new JLabel("graphique", JLabel.LEFT));             
+//            }
+//            else if(x==35){
+//                panelHaut.add(sombre);                
+//            }
+//            else if(x==36){
+//                panelHaut.add(colore);                
+//            }
+//            else {
+//                panelHaut.add(new JLabel(""));
+//            }
+//        }
        
 
         //Seconde partie de la fenêtre
@@ -153,7 +155,7 @@ public class VueSpecification extends Observable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setChanged();
-                notifyObservers(joueurs.getSelection().getActionCommand());
+                notifyObservers(new MessageCreation(Actions.VALIDER_NBJOUEUR,(int) Integer.valueOf(joueurs.getSelection().getActionCommand())));
                 clearChanged();
             }
         });
