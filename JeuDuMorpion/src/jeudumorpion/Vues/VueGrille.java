@@ -33,8 +33,9 @@ public class VueGrille extends Observable{
         window.setSize(1000, 500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
-        Color fond = new Color(64, 38, 6, 50);
+        Color fond = new Color(179, 204, 255);
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(fond);
         window.add(mainPanel) ;
         JPanel panelHaut = new JPanel(new BorderLayout()) ;
         mainPanel.add(panelHaut, BorderLayout.NORTH);
@@ -42,38 +43,37 @@ public class VueGrille extends Observable{
         //Marge autour du titre + titre
         panelHaut.add(new JLabel("            "), BorderLayout.SOUTH );
         panelHaut.add(new JLabel("            "), BorderLayout.NORTH);
-        panelHaut.setBackground(fond);
+        panelHaut.setOpaque(false);
         JLabel labelTitre = new JLabel("Jeu du morpion - Tournoi", JLabel.CENTER) ;
-        labelTitre.setForeground(Color.BLACK);
+
         labelTitre.setFont(new Font("Princetown LET", Font.PLAIN, (int) (labelTitre.getFont().getSize() * 2.5)));
-        panelHaut.add(labelTitre, BorderLayout.CENTER) ;
+        panelHaut.add(labelTitre, BorderLayout.CENTER);
         
         JButton retour = new JButton("Retour");
         panelHaut.add(retour, BorderLayout.WEST);
         retour.setContentAreaFilled(false);
-        retour.setOpaque(false);
         retour.setBorderPainted(false);
-        
+        retour.setFocusPainted(false);
         
         //Marge autour des cases du morpion
         JPanel marges = new JPanel(new BorderLayout());
         
-        mainPanel.add(marges, BorderLayout.WEST);
+        mainPanel.add(marges, BorderLayout.CENTER);
         JPanel panelMorp = new JPanel( new GridLayout(rows,cols));
         marges.add(new JLabel("        "), BorderLayout.NORTH);
         marges.add(new JLabel("        "), BorderLayout.WEST );
         marges.add(new JLabel("        "), BorderLayout.SOUTH );
         marges.add(new JLabel("        "), BorderLayout.EAST );
-        marges.setBackground(fond);
+        marges.setOpaque(false);
         marges.add(panelMorp, BorderLayout.CENTER);
         
         
         
         //Cases du morpion
+        Dimension d = new Dimension(mainPanel.getWidth()/2, mainPanel.getHeight());
         
         
-        
-        
+        marges.setPreferredSize(d);
         
         panelMorp.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         for (int row = 0; row < rows; row++) {
@@ -82,10 +82,10 @@ public class VueGrille extends Observable{
                 panelCase.setOpaque(false);
                 JButton btnCase = new JButton();
                 btnCase.setPreferredSize(new Dimension(150,100));
-                btnCase.setBorderPainted(false);
-                //btnCase.setOpaque(false);
-                //btnCase.setContentAreaFilled(false);
-               
+                //btnCase.setBorderPainted(false);
+                btnCase.setContentAreaFilled(false);
+                btnCase.setFocusPainted(false);
+                
                         int x = row;
                         int y = col;
                         btnCase.addActionListener(new ActionListener() {
@@ -147,15 +147,24 @@ public class VueGrille extends Observable{
 
         // Faire l'est de la vue: Tableau des victoires
 
+        
+        
+        JPanel margesPanDroite = new JPanel(new BorderLayout());
+        margesPanDroite.setOpaque(false);
+        mainPanel.add(margesPanDroite, BorderLayout.EAST);
+        margesPanDroite.add(new JLabel(" "), BorderLayout.NORTH);
+        margesPanDroite.add(new JLabel("          "), BorderLayout.EAST);
+        margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
         JPanel panelDroite = new JPanel(new BorderLayout());
-        mainPanel.add(panelDroite, BorderLayout.CENTER);
+        margesPanDroite.add(panelDroite, BorderLayout.CENTER);
         
         JPanel indicationJoueur = new JPanel(new BorderLayout());
         panelDroite.add(indicationJoueur, BorderLayout.NORTH);
         
-        JLabel affrontement = new JLabel(a.getPseudo() + " contre joueur " + b.getPseudo());
+        JLabel affrontement = new JLabel(a.getPseudo() + " contre joueur " + b.getPseudo(), JLabel.CENTER);
         indicationJoueur.add(affrontement);
-        
+        indicationJoueur.setOpaque(false);
+      
                 
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
         panelDroite.add(tab, BorderLayout.CENTER);

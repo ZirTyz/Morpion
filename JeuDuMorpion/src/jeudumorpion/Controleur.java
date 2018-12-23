@@ -40,7 +40,7 @@ public class Controleur implements Observer{
        Joueur a = new Joueur("Jacques");
        Joueur b = new Joueur("Frnaklin");
        vueGrille = new VueGrille(a, b);
-       //vueGrille.afficher();
+       vueGrille.afficher();
        vueSpe = new VueSpecification();
        //vueSpe.afficher();
        popUpPartie pp = new popUpPartie(a);
