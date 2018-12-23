@@ -27,24 +27,28 @@ import jeudumorpion.Vues.popUpPartie;
  */
 public class Controleur implements Observer{
    //private Grille grille = new Grille();
+    private ArrayList<Joueur> duel = new ArrayList<>();
+   //private HashMap<Joueur,Integer> joueurs = new HashMap<>();
    private ArrayList<Joueur> joueurs = new ArrayList<>();
    private VueGrille vueGrille;
    private VueSelection vueSelection;
    private VueSpecification vueSpe;
    private Grille grille;
+   private int nbCaseCoche=0;
+   private Joueur joueurCourant;
+   private popUpPartie victoire;
    
    public Controleur(){
        
-       //vueSelection=new VueSelection();
-       //vueSelection.afficher();
-       Joueur a = new Joueur("Jacques");
-       Joueur b = new Joueur("Frnaklin");
-       vueGrille = new VueGrille(a, b);
-       vueGrille.afficher();
-       vueSpe = new VueSpecification();
-       //vueSpe.afficher();
-       popUpPartie pp = new popUpPartie(a);
-       //pp.afficher();
+       vueSelection=new VueSelection();
+       vueSelection.afficher();
+       vueSelection.addObserver(this);
+//       Joueur a = new Joueur("Jacques");
+//       Joueur b = new Joueur("Frnaklin");
+//       vueGrille = new VueGrille(a, b);
+//       vueGrille.afficher();
+//       vueSpe = new VueSpecification();
+//       vueSpe.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {
@@ -53,7 +57,7 @@ public class Controleur implements Observer{
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
                 vueSpe = new VueSpecification();
                 vueSpe.afficher();
-                //vueSpe.addObserver(this);
+                vueSpe.addObserver(this);
             }
             if(((Message) arg).getAction()== Actions.TABLEAU){
 //                vueTab = new VueTableau();
@@ -61,19 +65,22 @@ public class Controleur implements Observer{
             
         }
         if (arg instanceof MessageCreation){
-            if(((MessageCreation) arg).getAction()== Actions.VALIDER_NBJOUEUR){ // creer une grille de la bonne taille vu le nombre de joueur
+            if(((MessageCreation) arg).getAction()== Actions.VALIDER_NBJOUEUR){ 
                 //vueCreationJoueur = new vueCrationJoueur(arg.getNbJoeur);
-//                Ajoute tout les joueurs dans l'arraylist
+                for (int x=0; x<((MessageCreation) arg).getNbJoueur();x++){
+                    //joueurs.put(new Joueur("J"+(x+1)), 0);
+                    joueurs.add(new Joueur("J"+(x+1)));
+                }
+                duel.add(joueurs.get(0));
+                duel.get(0).setSigne(Signe.X);
+                duel.add(joueurs.get(1));
+                duel.get(1).setSigne(Signe.O);
                 
-//                puis après création de la grille avec tout de bon
+                setJoueurCourant(duel.get(0));
+                vueGrille = new VueGrille(duel.get(0), duel.get(1));
+                vueGrille.afficher();
+                vueGrille.addObserver(this);
 
-//          if(((MessageCreation) arg.getAction()==Actions.VALIDER_CRÉATION_PARTIE){
-
-//                vueCration.afficher
-//                vueGrille=new VueGrille(((MessageCreation) arg).getNbJoueur()); 
-//                vueGrille.afficher();
-//                vueGrille.addObserver(this);
-//            }
                 
             }
         }
@@ -83,7 +90,37 @@ public class Controleur implements Observer{
                 int y =((MessageCase) arg).getY();
                 /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
 //                this.grille.getCase(x, y).setEtat_case();
-                this.grille.addCaseCoché(this.grille.getCase(x, y));
+                this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
+                this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
+                this.grille.addCaseCoché(this.grille.getCase(x, y));                
+                    setNbCaseCoche(getNbCaseCoche()+1);
+                if (getNbCaseCoche()==9){
+                    if(grille.Gagnant(joueurCourant.getSigne())){
+                       // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3); Augmentation des points.
+//                       vueGrille.fermer();
+                    } else {for (int i=0;i<duel.size();i++){
+                       // joueurs.replace(duel.get(i), joueurs.get(duel.get(i))+1);
+//                       vueGrille.fermer();
+                    }}
+                }
+                else if(getNbCaseCoche()>=5 && getNbCaseCoche()<9){
+                    if(grille.Gagnant(joueurCourant.getSigne())){
+                       // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3);
+//                       vueGrille.fermer();
+                        victoire = new popUpPartie(joueurCourant);
+                        victoire.afficher();
+                    }else{
+                    duel.set(0, duel.get(1));
+                    duel.set(1, joueurCourant);
+                    setJoueurCourant(duel.get(0));
+                    }
+                        
+                     
+                } else{
+                    duel.set(0, duel.get(1));
+                    duel.set(1, joueurCourant);
+                    setJoueurCourant(duel.get(0));
+                }
             }
         }
         /*
@@ -94,6 +131,34 @@ public class Controleur implements Observer{
         Et regarder tout les boutons à faire.
         */
         
+    }
+
+    /**
+     * @return the nbCaseCoche
+     */
+    public int getNbCaseCoche() {
+        return nbCaseCoche;
+    }
+
+    /**
+     * @param nbCaseCoche the nbCaseCoche to set
+     */
+    public void setNbCaseCoche(int nbCaseCoche) {
+        this.nbCaseCoche = nbCaseCoche;
+    }
+
+    /**
+     * @return the joueurCourant
+     */
+    public Joueur getJoueurCourant() {
+        return joueurCourant;
+    }
+
+    /**
+     * @param joueurCourant the joueurCourant to set
+     */
+    public void setJoueurCourant(Joueur joueurCourant) {
+        this.joueurCourant = joueurCourant;
     }
    
     

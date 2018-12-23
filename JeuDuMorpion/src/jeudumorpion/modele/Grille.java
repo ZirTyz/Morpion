@@ -22,7 +22,8 @@ public class Grille {
         int nb=1;
         for(int x=0;x<3;x++){
             for(int y=0;y<3;y++){
-                this.cases[x][y].setNumCase(nb);
+                this.cases[x][y]=new Case(nb);
+                this.cases[x][y].setEtat_case(Signe.NULL);
                 nb = nb+1;
             }
         }
@@ -43,45 +44,46 @@ public class Grille {
         return this.cases[x][y];
     }
     //mettre tout les cas possible pour voir si il y a un gagnant
-    public Signe Gagnant(Signe s){
-        if (this.cases[1][1].getJoueurAyantCoché().equals(s)){   // changer en getEtat_case !!          
-            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[2][2].getJoueurAyantCoché().getSigne())){ // diagonal haut gauche
-                return s;  
+    public boolean Gagnant(Signe s){
+        if (this.cases[1][1].getEtat_case().equals(s)){   // changer en getEtat_case !!          
+            
+            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[2][2].getEtat_case())){ // diagonal haut gauche
+                return true;  
             }
-            else if(s.equals(this.cases[0][2].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][0].getJoueurAyantCoché().getSigne())){ // diagonal haut droite
-                return s;    
+            else if(s.equals(this.cases[0][2].getEtat_case()) && s.equals(this.cases[2][0].getEtat_case())){ // diagonal haut droite
+                return true;    
             }
-            else if(s.equals(this.cases[0][1].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][1].getJoueurAyantCoché().getSigne())){ //verticale milieu
-                return s;
+            else if(s.equals(this.cases[0][1].getEtat_case()) && s.equals(this.cases[2][1].getEtat_case())){ //verticale milieu
+                return true;
             }
-            else if(s.equals(this.cases[1][0].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[1][2].getJoueurAyantCoché().getSigne())){ //horizontal milieu
-                return s;
+            else if( s.equals(this.cases[1][0].getEtat_case()) && s.equals(this.cases[1][2].getEtat_case())){ //horizontal milieu
+                return true;
             }            
         }
-        else if(this.cases[0][1].getJoueurAyantCoché().equals(s)){ //horizontal haut
-            if(s.equals(this.cases[0][0].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[0][2].getJoueurAyantCoché().getSigne())){
-                return s;
+        else if(this.cases[0][1].getEtat_case().equals(s)){ //horizontal haut
+            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[0][2].getEtat_case())){
+                return true;
             }
         }
-        else if(this.cases[2][1].getJoueurAyantCoché().equals(s)){ //horizontal bas
-            if(s.equals(this.cases[2][0].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][2].getJoueurAyantCoché().getSigne())){
-                return s;
+        else if(this.cases[2][1].getEtat_case().equals(s)){ //horizontal bas
+            if(s.equals(this.cases[2][0].getEtat_case()) && s.equals(this.cases[2][2].getEtat_case())){
+                return true;
             } 
             
         }
-        else if(this.cases[1][0].getJoueurAyantCoché().equals(s)){ //vertical gauche
-            if(s.equals(this.cases[0][0].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[0][2].getJoueurAyantCoché().getSigne())){
-                return s;    
+        else if(this.cases[1][0].getEtat_case().equals(s)){ //vertical gauche
+            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[0][2].getEtat_case())){
+                return true;    
             } 
             
         }
-        else if(this.cases[1][2].getJoueurAyantCoché().equals(s)){ // vertical droite
-            if(s.equals(this.cases[0][2].getJoueurAyantCoché().getSigne()) && s.equals(this.cases[2][2].getJoueurAyantCoché().getSigne())){
-                return s;
+        else if(this.cases[1][2].getEtat_case().equals(s)){ // vertical droite
+            if(s.equals(this.cases[0][2].getEtat_case()) && s.equals(this.cases[2][2].getEtat_case())){
+                return true;
             } 
             
         }
-        return null;
+        return false;
 
     }
 }
