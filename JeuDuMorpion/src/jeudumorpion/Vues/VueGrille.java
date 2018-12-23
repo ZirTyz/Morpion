@@ -82,7 +82,7 @@ public class VueGrille extends Observable{
                 panelCase.setOpaque(false);
                 JButton btnCase = new JButton();
                 btnCase.setPreferredSize(new Dimension(150,100));
-                //btnCase.setBorderPainted(false);
+                btnCase.setBorderPainted(false);
                 btnCase.setContentAreaFilled(false);
                 btnCase.setFocusPainted(false);
                 
@@ -145,15 +145,13 @@ public class VueGrille extends Observable{
     }
 }
 
-        // Faire l'est de la vue: Tableau des victoires
-
-        
-        
+        // Faire l'est de la vue: Joueur a contre joueur b
         JPanel margesPanDroite = new JPanel(new BorderLayout());
         margesPanDroite.setOpaque(false);
         mainPanel.add(margesPanDroite, BorderLayout.EAST);
         margesPanDroite.add(new JLabel(" "), BorderLayout.NORTH);
-        margesPanDroite.add(new JLabel("          "), BorderLayout.EAST);
+        margesPanDroite.add(new JLabel("                "), BorderLayout.EAST);
+        margesPanDroite.add(new JLabel("        "), BorderLayout.WEST);
         margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
         JPanel panelDroite = new JPanel(new BorderLayout());
         margesPanDroite.add(panelDroite, BorderLayout.CENTER);
@@ -165,15 +163,12 @@ public class VueGrille extends Observable{
         indicationJoueur.add(affrontement);
         indicationJoueur.setOpaque(false);
       
-                
+        // Faire l'est de la vue: Tableau des victoires
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
         panelDroite.add(tab, BorderLayout.CENTER);
         panelDroite.setBackground(fond);
         panelMorp.setBackground(fond);
 
-      
-        //0, 23, 116, 169
-        //81, 38, 6, 140
     }
 
     public void afficher() {
