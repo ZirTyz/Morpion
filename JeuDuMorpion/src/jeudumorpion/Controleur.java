@@ -20,6 +20,7 @@ import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.MessageCase;
 import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
+import jeudumorpion.Vues.VueInformations;
 import jeudumorpion.Vues.popUpPartie;
 /**
  *
@@ -37,6 +38,8 @@ public class Controleur implements Observer{
    private int nbCaseCoche=0;
    private Joueur joueurCourant;
    private popUpPartie victoire;
+   private VueInformations vueInfo;
+            private int nbj = 8 ;
    
    public Controleur(){
        
@@ -49,6 +52,8 @@ public class Controleur implements Observer{
 //       vueGrille.afficher();
 //       vueSpe = new VueSpecification();
 //       vueSpe.afficher();
+             //   vueInfo = new VueInformations(nbj);
+               // vueInfo.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {
