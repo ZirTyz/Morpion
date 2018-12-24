@@ -61,10 +61,11 @@ public class Controleur implements Observer{
         if (arg instanceof Message){
             Message message = (Message) arg;
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
-                vueSelection.fermer();
+                
                 vueSpe = new VueSpecificationNbJoueurs();
                 vueSpe.afficher();
                 vueSpe.addObserver(this);
+                vueSelection.fermer();
             }
             if(((Message) arg).getAction()== Actions.TABLEAU){
 //                vueTab = new VueTableau();
@@ -86,12 +87,12 @@ public class Controleur implements Observer{
 //                    vueGrille = new VueGrille(duel.get(0), duel.get(1));
 //                    vueGrille.afficher();
 //                    vueGrille.addObserver(this);
-                vueSpe.fermer();
+                
                 nbj = ((MessageCreation) arg).getNbJoueur();
                 vueInfo = new VueInformationsJoueurs(((MessageCreation) arg).getNbJoueur());
                 vueInfo.afficher();
                 vueInfo.addObserver(this);
-
+                vueSpe.fermer();
                 
             }
         }

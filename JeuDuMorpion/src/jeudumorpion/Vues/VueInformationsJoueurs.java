@@ -39,7 +39,7 @@ import jeudumorpion.utilitaires.MessageInfosJoueurs;
 public class VueInformationsJoueurs extends Observable{
     private JFrame window;
     private int nbJoueurs;
-    private JTextField champPseudo;
+    private JTextField[][] champPseudo = new JTextField[0][7];
     private JButton chooseColor = new JButton();
     private JButton valider;
     
@@ -70,16 +70,16 @@ public class VueInformationsJoueurs extends Observable{
         panelCentre.setOpaque(false);
         mainPanel.add(panelCentre, BorderLayout.CENTER);
         
-        ;
+
+        
         int nb =1;
         while (nb < nbJoueurs+1 && nb <=8){
             panelCentre.add(new JLabel("Surnom du joueur : ", JLabel.RIGHT));
             JPanel alignementTextField = new JPanel(new GridLayout(1,2));
             alignementTextField.setOpaque(false);
             panelCentre.add(alignementTextField);
-            champPseudo = new JTextField();
-            champPseudo.setText("Joueur " + nb);
-            alignementTextField.add(champPseudo);
+            champPseudo[0][nb-1].setText("Joueur "+ nb);
+            alignementTextField.add(champPseudo[1][nb]);
             alignementTextField.add(new JLabel(""));
             
             panelCentre.add(new JLabel("Couleur du joueur : ", JLabel.RIGHT));
@@ -100,6 +100,7 @@ public class VueInformationsJoueurs extends Observable{
             panelCentre.add(new JLabel(""));
             panelCentre.add(new JLabel(""));
             nb = nb+1;
+            
         }
         
         
@@ -126,7 +127,7 @@ public class VueInformationsJoueurs extends Observable{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setChanged();
-                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, champPseudo.getText(), Color.blue)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
+                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, champPseudo[1][1].getText(),champPseudo[1][2].getText(),champPseudo[1][3].getText(),champPseudo[1][4].getText(),champPseudo[1][5].getText(),champPseudo[1][6].getText(),champPseudo[1][7].getText(),champPseudo[1][8].getText(), Color.blue)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
                 clearChanged();
             }
         });
