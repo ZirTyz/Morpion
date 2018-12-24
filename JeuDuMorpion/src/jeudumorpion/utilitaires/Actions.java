@@ -20,6 +20,7 @@ public enum Actions {
     VALIDER_NBJOUEUR,
     TOUR_SUIVANT,
     RETOUR,
-    NOUVEAUX_TOURNOI;
+    NOUVEAUX_TOURNOI,
+    INSCRIPTION_JOUEUR;
     
 }

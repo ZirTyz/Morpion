@@ -22,6 +22,7 @@ import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
 import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpPartie;
+import jeudumorpion.utilitaires.MessageInfosJoueurs;
 /**
  *
  * @author chapellr
@@ -39,7 +40,7 @@ public class Controleur implements Observer{
    private Joueur joueurCourant;
    private popUpPartie victoire;
    private VueInformationsJoueurs vueInfo;
-            private int nbj = 8 ;
+   private int nbj;
    
    public Controleur(){
        
@@ -86,10 +87,24 @@ public class Controleur implements Observer{
 //                    vueGrille.afficher();
 //                    vueGrille.addObserver(this);
                 vueSpe.fermer();
+                nbj = ((MessageCreation) arg).getNbJoueur();
                 vueInfo = new VueInformationsJoueurs(((MessageCreation) arg).getNbJoueur());
                 vueInfo.afficher();
+                vueInfo.addObserver(this);
 
                 
+            }
+        }
+        if (arg instanceof MessageInfosJoueurs){
+            if(((MessageInfosJoueurs) arg).getAction() == Actions.INSCRIPTION_JOUEUR){
+                for (int x = 1; x <= nbj; x++){
+                Joueur j = new Joueur(((MessageInfosJoueurs) arg).getPseudo());
+                duel.add(j);
+            }
+            vueGrille = new VueGrille(duel.get(0), duel.get(1));
+            vueGrille.afficher();
+            vueGrille.addObserver(this);
+            vueInfo.fermer();
             }
         }
         if (arg instanceof MessageCase){

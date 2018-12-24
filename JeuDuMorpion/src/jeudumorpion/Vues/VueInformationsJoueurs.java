@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -28,12 +29,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
+import jeudumorpion.utilitaires.Actions;
+import jeudumorpion.utilitaires.MessageInfosJoueurs;
 
 /**
  *
  * @author rose
  */
-public class VueInformationsJoueurs {
+public class VueInformationsJoueurs extends Observable{
     private JFrame window;
     private int nbJoueurs;
     private JTextField champPseudo;
@@ -118,10 +121,14 @@ public class VueInformationsJoueurs {
                 valider.setBorderPainted(false);
                 valider.setContentAreaFilled(false);
             }
-
-            
-            
-           
+        });
+        valider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, champPseudo.getText(), Color.blue)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
+                clearChanged();
+            }
         });
         JPanel panelBas = new JPanel(new GridLayout(1, 3));
         panelBas.setOpaque(false);

@@ -23,6 +23,7 @@ import javax.swing.border.AbstractBorder;
  * @author rose
  */
 public class TextBubbleBorder extends AbstractBorder {
+    //https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
  private Color color;
     private int thickness = 4;
     private int radii = 8;
