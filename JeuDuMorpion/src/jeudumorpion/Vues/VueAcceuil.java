@@ -25,7 +25,7 @@ import jeudumorpion.utilitaires.Message;
  *
  * @author mirasl
  */
-public class VueSelection extends Observable{
+public class VueAcceuil extends Observable{
 
     private final JFrame window;
     private final JButton btnNewPartie;
@@ -35,7 +35,7 @@ public class VueSelection extends Observable{
             private JButton sombre;
         private JButton colore;
 
-    public VueSelection(){
+    public VueAcceuil(){
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         // Définit la taille de la fenêtre en pixels

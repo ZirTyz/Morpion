@@ -33,14 +33,14 @@ import javax.swing.plaf.basic.BasicOptionPaneUI;
  *
  * @author rose
  */
-public class VueInformations {
+public class VueInformationsJoueurs {
     private JFrame window;
     private int nbJoueurs;
     private JTextField champPseudo;
     private JButton chooseColor = new JButton();
     private JButton valider;
     
-    public VueInformations(int nbJoueurs){
+    public VueInformationsJoueurs(int nbJoueurs){
         this.nbJoueurs = nbJoueurs;
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Informations");

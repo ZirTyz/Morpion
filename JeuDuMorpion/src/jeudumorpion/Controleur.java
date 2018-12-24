@@ -11,8 +11,8 @@ import jeudumorpion.modele.Joueur;
 import jeudumorpion.Vues.VueGrille;
 import java.util.Observable;
 import java.util.Observer;
-import jeudumorpion.Vues.VueSelection;
-import jeudumorpion.Vues.VueSpecification;
+import jeudumorpion.Vues.VueAcceuil;
+import jeudumorpion.Vues.VueSpecificationNbJoueurs;
 import jeudumorpion.modele.Grille;
 import jeudumorpion.modele.Signe;
 import jeudumorpion.utilitaires.Message;
@@ -20,7 +20,7 @@ import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.MessageCase;
 import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
-import jeudumorpion.Vues.VueInformations;
+import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpPartie;
 /**
  *
@@ -32,18 +32,18 @@ public class Controleur implements Observer{
    //private HashMap<Joueur,Integer> joueurs = new HashMap<>();
    private ArrayList<Joueur> joueurs = new ArrayList<>();
    private VueGrille vueGrille;
-   private VueSelection vueSelection;
-   private VueSpecification vueSpe;
+   private VueAcceuil vueSelection;
+   private VueSpecificationNbJoueurs vueSpe;
    private Grille grille = new Grille();
    private int nbCaseCoche=0;
    private Joueur joueurCourant;
    private popUpPartie victoire;
-   private VueInformations vueInfo;
+   private VueInformationsJoueurs vueInfo;
             private int nbj = 8 ;
    
    public Controleur(){
        
-       vueSelection=new VueSelection();
+       vueSelection=new VueAcceuil();
        vueSelection.afficher();
        vueSelection.addObserver(this);
 //       Joueur a = new Joueur("Jacques");
@@ -61,7 +61,7 @@ public class Controleur implements Observer{
             Message message = (Message) arg;
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
                 vueSelection.fermer();
-                vueSpe = new VueSpecification();
+                vueSpe = new VueSpecificationNbJoueurs();
                 vueSpe.afficher();
                 vueSpe.addObserver(this);
             }
@@ -86,7 +86,7 @@ public class Controleur implements Observer{
 //                    vueGrille.afficher();
 //                    vueGrille.addObserver(this);
                 vueSpe.fermer();
-                vueInfo = new VueInformations(((MessageCreation) arg).getNbJoueur());
+                vueInfo = new VueInformationsJoueurs(((MessageCreation) arg).getNbJoueur());
                 vueInfo.afficher();
 
                 

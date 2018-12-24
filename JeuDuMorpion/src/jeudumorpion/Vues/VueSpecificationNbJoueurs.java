@@ -21,7 +21,7 @@ import jeudumorpion.utilitaires.MessageCreation;
  *
  * @author rose
  */
-public class VueSpecification extends Observable{
+public class VueSpecificationNbJoueurs extends Observable{
         private JFrame window;
 //        private JButton sombre;
 //        private JButton colore;
@@ -35,7 +35,7 @@ public class VueSpecification extends Observable{
         private JRadioButton eight;
         private ImagesInscription deux;
         
-        public VueSpecification(){
+        public VueSpecificationNbJoueurs(){
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -167,7 +167,7 @@ public class VueSpecification extends Observable{
     public void afficher() {
         this.window.setVisible(true);
     }
-        public void fermer(){
-        this.window.setVisible(false);
-    }
+    public void fermer(){
+    this.window.setVisible(false);
+}
 }
