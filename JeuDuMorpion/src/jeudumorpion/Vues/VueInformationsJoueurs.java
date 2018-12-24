@@ -78,7 +78,7 @@ public class VueInformationsJoueurs extends Observable{
             JPanel alignementTextField = new JPanel(new GridLayout(1,2));
             alignementTextField.setOpaque(false);
             panelCentre.add(alignementTextField);
-            champPseudo[0][nb-1].setText("Joueur "+ nb);
+            champPseudo[0][nb-1].setText("Joueur "+ nb); ////ICI PROBLÈME
             alignementTextField.add(champPseudo[1][nb]);
             alignementTextField.add(new JLabel(""));
             
