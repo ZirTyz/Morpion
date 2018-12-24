@@ -52,14 +52,15 @@ public class Controleur implements Observer{
 //       vueGrille.afficher();
 //       vueSpe = new VueSpecification();
 //       vueSpe.afficher();
-             //   vueInfo = new VueInformations(nbj);
-               // vueInfo.afficher();
+                //vueInfo = new VueInformations(nbj);
+                //vueInfo.afficher();
    }
     @Override
     public void update(Observable arg0, Object arg) {
         if (arg instanceof Message){
             Message message = (Message) arg;
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
+                vueSelection.fermer();
                 vueSpe = new VueSpecification();
                 vueSpe.afficher();
                 vueSpe.addObserver(this);
@@ -72,19 +73,21 @@ public class Controleur implements Observer{
         if (arg instanceof MessageCreation){
             if(((MessageCreation) arg).getAction()== Actions.VALIDER_NBJOUEUR){ 
                 //vueCreationJoueur = new vueCrationJoueur(arg.getNbJoeur);
-                for (int x=0; x<((MessageCreation) arg).getNbJoueur();x++){
-                    //joueurs.put(new Joueur("J"+(x+1)), 0);
-                    joueurs.add(new Joueur("J"+(x+1)));
-                }
-                duel.add(joueurs.get(0));
-                duel.get(0).setSigne(Signe.X);
-                duel.add(joueurs.get(1));
-                duel.get(1).setSigne(Signe.O);
-                
-                setJoueurCourant(duel.get(0));
-                vueGrille = new VueGrille(duel.get(0), duel.get(1));
-                vueGrille.afficher();
-                vueGrille.addObserver(this);
+//                    for (int x=0; x<((MessageCreation) arg).getNbJoueur();x++){
+//                        joueurs.add(new Joueur("J"+(x+1)));
+//                    }
+//                    duel.add(joueurs.get(0));
+//                    duel.get(0).setSigne(Signe.X);
+//                    duel.add(joueurs.get(1));
+//                    duel.get(1).setSigne(Signe.O);
+//
+//                    setJoueurCourant(duel.get(0));
+//                    vueGrille = new VueGrille(duel.get(0), duel.get(1));
+//                    vueGrille.afficher();
+//                    vueGrille.addObserver(this);
+                vueSpe.fermer();
+                vueInfo = new VueInformations(((MessageCreation) arg).getNbJoueur());
+                vueInfo.afficher();
 
                 
             }

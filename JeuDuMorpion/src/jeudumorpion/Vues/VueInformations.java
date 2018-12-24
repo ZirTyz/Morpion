@@ -14,7 +14,10 @@ import static java.awt.SystemColor.window;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
@@ -22,6 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 /**
@@ -98,12 +103,36 @@ public class VueInformations {
         valider = new JButton("Valider");
         valider.setBorderPainted(false);
         valider.setContentAreaFilled(false);
+        valider.addMouseListener( new MouseAdapter() {
+            public void mouseEntered(MouseEvent me) {
+                valider.setBorderPainted(true);
+                valider.setContentAreaFilled(true);
+                Color btn = new Color(179, 12, 254);
+                TextBubbleBorder abB = new TextBubbleBorder(Color.BLACK,1,5,0);
+                valider.setBorder(abB);
+                valider.setOpaque(false);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                valider.setBorderPainted(false);
+                valider.setContentAreaFilled(false);
+            }
+
+            
+            
+           
+        });
         JPanel panelBas = new JPanel(new GridLayout(1, 3));
         panelBas.setOpaque(false);
-        mainPanel.add(panelBas, BorderLayout.SOUTH);
         panelBas.add(new JLabel(""));
         panelBas.add(valider);
         panelBas.add(new JLabel(""));
+        
+        JPanel panelMarge = new JPanel();
+        panelMarge.setOpaque(false);
+        mainPanel.add(panelMarge, BorderLayout.SOUTH);
+        panelMarge.add(panelBas, BorderLayout.CENTER);
         
         
         
@@ -112,6 +141,9 @@ public class VueInformations {
 }
         public void afficher() {
         this.window.setVisible(true);
+    }
+                public void fermer(){
+        this.window.setVisible(false);
     }
 }
 

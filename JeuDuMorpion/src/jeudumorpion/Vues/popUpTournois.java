@@ -71,4 +71,7 @@ public class popUpTournois extends Observable{
     public void afficher(){
         this.frame.setVisible(true);
     }
+        public void fermer(){
+        this.frame.setVisible(false);
+    }
   }
