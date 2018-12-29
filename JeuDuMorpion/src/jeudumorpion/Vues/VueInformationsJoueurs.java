@@ -29,6 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
+import jeudumorpion.modele.Joueur;
 import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.MessageInfosJoueurs;
 
@@ -39,9 +40,9 @@ import jeudumorpion.utilitaires.MessageInfosJoueurs;
 public class VueInformationsJoueurs extends Observable{
     private JFrame window;
     private int nbJoueurs;
-    private JTextField[][] champPseudo = new JTextField[0][7];
     private JButton chooseColor = new JButton();
     private JButton valider;
+    private HashMap<String, Color> nomsJoueurs = new HashMap();
     
     public VueInformationsJoueurs(int nbJoueurs){
         this.nbJoueurs = nbJoueurs;
@@ -78,12 +79,11 @@ public class VueInformationsJoueurs extends Observable{
             JPanel alignementTextField = new JPanel(new GridLayout(1,2));
             alignementTextField.setOpaque(false);
             panelCentre.add(alignementTextField);
-            champPseudo[0][nb-1].setText("Joueur "+ nb); ////ICI PROBLÈME
-            alignementTextField.add(champPseudo[1][nb]);
+            JTextField champPseudo = new JTextField();
+            champPseudo.setText("Joueur "+ nb);
+            alignementTextField.add(champPseudo);
             alignementTextField.add(new JLabel(""));
-            
             panelCentre.add(new JLabel("Couleur du joueur : ", JLabel.RIGHT));
-            
             ColorChooserButton ccb = new ColorChooserButton(Color.lightGray);
             ccb.setFocusPainted(false);
             ccb.setContentAreaFilled(false);
@@ -100,6 +100,7 @@ public class VueInformationsJoueurs extends Observable{
             panelCentre.add(new JLabel(""));
             panelCentre.add(new JLabel(""));
             nb = nb+1;
+                        nomsJoueurs.put(champPseudo.getText(), ccb.getSelectedColor());
             
         }
         
@@ -127,7 +128,7 @@ public class VueInformationsJoueurs extends Observable{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setChanged();
-                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, champPseudo[1][1].getText(),champPseudo[1][2].getText(),champPseudo[1][3].getText(),champPseudo[1][4].getText(),champPseudo[1][5].getText(),champPseudo[1][6].getText(),champPseudo[1][7].getText(),champPseudo[1][8].getText(), Color.blue)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
+                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, nomsJoueurs)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
                 clearChanged();
             }
         });
@@ -147,6 +148,7 @@ public class VueInformationsJoueurs extends Observable{
         
         
 }
+
         public void afficher() {
         this.window.setVisible(true);
     }

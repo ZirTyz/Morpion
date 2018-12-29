@@ -98,8 +98,8 @@ public class Controleur implements Observer{
         }
         if (arg instanceof MessageInfosJoueurs){
             if(((MessageInfosJoueurs) arg).getAction() == Actions.INSCRIPTION_JOUEUR){
-                for (int x = 1; x <= nbj; x++){
-                Joueur j = new Joueur(((MessageInfosJoueurs) arg).getPseudo());
+            for (String nomJ : ((MessageInfosJoueurs) arg).getPseudoJoueur().keySet()){
+                Joueur j = new Joueur(nomJ);
                 duel.add(j);
             }
             vueGrille = new VueGrille(duel.get(0), duel.get(1));
