@@ -123,24 +123,65 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientdeux.setBorderPainted(false);
         contientdeux.setFocusPainted(false);
         contientdeux.setContentAreaFilled(false);
-                                        contientdeux.setIcon(new ImageIcon());
-        
+        contientdeux.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/double.png"));
         selectNbJoueurs.add(contientdeux);
         selectNbJoueurs.add(two);
         two.setSelected(true);
-        selectNbJoueurs.add(new JLabel(""));
+        
+        JButton contientcinq = new JButton();
+        contientcinq.setBorderPainted(false);
+        contientcinq.setFocusPainted(false);
+        contientcinq.setContentAreaFilled(false);
+        contientcinq.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Quintuple.png"));
+        selectNbJoueurs.add(contientcinq);       
         selectNbJoueurs.add(five);
-        selectNbJoueurs.add(new JLabel(""));
+        
+        JButton contienttrois = new JButton();
+        contienttrois.setBorderPainted(false);
+        contienttrois.setFocusPainted(false);
+        contienttrois.setContentAreaFilled(false);
+        contienttrois.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/triple.png"));
+        selectNbJoueurs.add(contienttrois);
         selectNbJoueurs.add(three);
-        selectNbJoueurs.add(new JLabel(""));
+        
+        
+        JButton contientsix = new JButton();
+        contientsix.setBorderPainted(false);
+        contientsix.setFocusPainted(false);
+        contientsix.setContentAreaFilled(false);
+        contientsix.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Sextuple.png"));
+        selectNbJoueurs.add(contientsix);       
         selectNbJoueurs.add(six);
-        selectNbJoueurs.add(new JLabel(""));
+        
+        
+        JButton contientquatre = new JButton();
+        contientquatre.setBorderPainted(false);
+        contientquatre.setFocusPainted(false);
+        contientquatre.setContentAreaFilled(false);
+        contientquatre.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Quadruple.png"));
+        selectNbJoueurs.add(contientquatre);       
         selectNbJoueurs.add(four);
-        selectNbJoueurs.add(new JLabel(""));
+        
+        
+        JButton contientsept = new JButton();
+        contientsept.setBorderPainted(false);
+        contientsept.setFocusPainted(false);
+        contientsept.setContentAreaFilled(false);
+        contientsept.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Septuple.png"));
+        selectNbJoueurs.add(contientsept); 
         selectNbJoueurs.add(seven);
+        
+        
         selectNbJoueurs.add(new JLabel(""));
-        selectNbJoueurs.add(new JLabel(""));        
+        
+        JButton contienthuit = new JButton();
+        contienthuit.setBorderPainted(false);
+        contienthuit.setFocusPainted(false);
+        contienthuit.setContentAreaFilled(false);
+        contienthuit.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/hectuple.png"));
+        selectNbJoueurs.add(contienthuit);         
         selectNbJoueurs.add(eight);
+        
         selectNbJoueurs.add(new JLabel(""));
         
         
