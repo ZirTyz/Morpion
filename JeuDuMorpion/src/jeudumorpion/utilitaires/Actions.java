@@ -21,6 +21,7 @@ public enum Actions {
     TOUR_SUIVANT,
     RETOUR,
     NOUVELLE_PARTIE,
-    INSCRIPTION_JOUEUR;
+    INSCRIPTION_JOUEUR,
+    ACCUEIL;
     
 }

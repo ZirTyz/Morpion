@@ -50,7 +50,7 @@ public class popUpDuel extends Observable {
         @Override
         public void actionPerformed(ActionEvent ae) {
             setChanged();
-            notifyObservers(new Message(Actions.RETOUR));
+            notifyObservers(new Message(Actions.ACCUEIL));
             clearChanged();
         }
     });

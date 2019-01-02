@@ -11,7 +11,7 @@ import jeudumorpion.modele.Joueur;
 import jeudumorpion.Vues.VueGrille;
 import java.util.Observable;
 import java.util.Observer;
-import jeudumorpion.Vues.VueAcceuil;
+import jeudumorpion.Vues.VueAccueil;
 import jeudumorpion.Vues.VueSpecificationNbJoueurs;
 import jeudumorpion.modele.Grille;
 import jeudumorpion.modele.Signe;
@@ -36,7 +36,7 @@ public class Controleur implements Observer{
    //private HashMap<Joueur,Integer> joueurs = new HashMap<>();
    private ArrayList<Joueur> joueurs = new ArrayList<>();
    private VueGrille vueGrille;
-   private VueAcceuil vueSelection;
+   private VueAccueil vueSelection;
    private VueSpecificationNbJoueurs vueSpe;
    private Grille grille = new Grille();
    private int nbCaseCoche=0;
@@ -46,13 +46,13 @@ public class Controleur implements Observer{
    private popUpTournois victoireTourn;
    private VueInformationsJoueurs vueInfo;
    private int nbj;
-   private int y =0;
-   private int z =0;
+   private int tousJoueurs =0;
+   private int joueursPatieCourante =0;
    private int nbTours = 0;
    
    public Controleur(){
        
-       vueSelection=new VueAcceuil();
+       vueSelection=new VueAccueil();
        vueSelection.afficher();
        vueSelection.addObserver(this);
 //       Joueur a = new Joueur("Jacques");
@@ -78,8 +78,13 @@ public class Controleur implements Observer{
             if(((Message) arg).getAction()== Actions.TABLEAU){
 //                vueTab = new VueTableau();
             }
+            if(((Message) arg).getAction()== Actions.ACCUEIL){
+               vueSelection.afficher(); ///// ICI PROBLEME
+               vueSelection.addObserver(this);
+            }
+            
             if(((Message) arg).getAction()== Actions.TOUR_SUIVANT){
-
+                
             }
             
         }
@@ -114,12 +119,12 @@ public class Controleur implements Observer{
                 joueurs.add(j);
             }
             
-            duel.add(joueurs.get(y));
-            duel.get(z).setSigne(Signe.X);
-            duel.add(joueurs.get(y+1));
-            duel.get(z+1).setSigne(Signe.O);
-            joueurCourant = duel.get(z);
-            vueGrille = new VueGrille(duel.get(z), duel.get(z+1));
+            duel.add(joueurs.get(tousJoueurs));
+            duel.get(joueursPatieCourante).setSigne(Signe.X);
+            duel.add(joueurs.get(tousJoueurs+1));
+            duel.get(joueursPatieCourante+1).setSigne(Signe.O);
+            joueurCourant = duel.get(joueursPatieCourante);
+            vueGrille = new VueGrille(duel.get(joueursPatieCourante), duel.get(joueursPatieCourante+1));
             this.vueGrille.joueurActif(joueurCourant);
             vueGrille.afficher();
             vueGrille.addObserver(this);
@@ -144,10 +149,10 @@ public class Controleur implements Observer{
                     this.grille.addCaseCoché(this.grille.getCase(x, y));
 
                 
-                if(joueurCourant.getPseudo().equals(duel.get(z).getPseudo())){
+                if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
                     this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
                 }
-                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {;
+                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {;
                     this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
                 }
                 
@@ -192,12 +197,12 @@ public class Controleur implements Observer{
                      
                 }
                else{
-                    if(joueurCourant.getPseudo().equals(duel.get(z).getPseudo())){
-                        joueurCourant = duel.get(z+1);
+                    if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
+                        joueurCourant = duel.get(joueursPatieCourante+1);
                         this.vueGrille.joueurActif(joueurCourant);
                 }
-                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {
-                    joueurCourant = duel.get(z);
+                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {
+                    joueurCourant = duel.get(joueursPatieCourante);
                     this.vueGrille.joueurActif(joueurCourant);
                 }
 ////                    duel.set(0, duel.get(1));
