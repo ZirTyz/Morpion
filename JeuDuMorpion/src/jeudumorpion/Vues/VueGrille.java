@@ -171,9 +171,6 @@ public class VueGrille extends Observable{
         indicationJoueur.add(affrontement, BorderLayout.NORTH);
         indicationJoueur.setOpaque(false);
         
-        //À toi de jouer !
-        //JLabel jouer = new JLabel("À toi de jouer" + nomJoueur, JLabel.CENTER);
-        //indicationJoueur.add(jouer, BorderLayout.CENTER);
       
         // Faire l'est de la vue: Tableau des victoires
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
@@ -193,6 +190,7 @@ public class VueGrille extends Observable{
     public void joueurActif(Joueur j){
         //À toi de jouer !
         JLabel jouer = new JLabel("À toi de jouer" + j.getPseudo(), JLabel.CENTER);
+        jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
         indicationJoueur.add(jouer, BorderLayout.CENTER);
     }
     

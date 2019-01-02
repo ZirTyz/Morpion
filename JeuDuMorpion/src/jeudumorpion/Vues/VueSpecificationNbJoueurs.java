@@ -118,9 +118,12 @@ public class VueSpecificationNbJoueurs extends Observable{
         String imgFolder = System.getProperty("user.dir") + "/src/imagesJoueurs/" ;
         
         deux = new ImagesInscription(imgFolder + "double.png", 10, 10, 10, 10);
-        JPanel contientdeux = new JPanel();
-        contientdeux.add(deux);
-
+        
+        JButton contientdeux = new JButton();
+        contientdeux.setBorderPainted(false);
+        contientdeux.setFocusPainted(false);
+        contientdeux.setContentAreaFilled(false);
+                                        contientdeux.setIcon(new ImageIcon());
         
         selectNbJoueurs.add(contientdeux);
         selectNbJoueurs.add(two);

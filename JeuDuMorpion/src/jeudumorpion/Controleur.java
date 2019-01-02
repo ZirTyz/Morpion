@@ -43,6 +43,7 @@ public class Controleur implements Observer{
    private VueInformationsJoueurs vueInfo;
    private int nbj;
    private int y =0;
+   private int z =0;
    
    public Controleur(){
        
@@ -102,15 +103,19 @@ public class Controleur implements Observer{
             if(((MessageInfosJoueurs) arg).getAction() == Actions.INSCRIPTION_JOUEUR){
             for (String nomJ : ((MessageInfosJoueurs) arg).getPseudoJoueur().keySet()){
                 Joueur j = new Joueur(nomJ);
-                duel.add(j);
+                joueurs.add(j);
             }
-            vueGrille = new VueGrille(duel.get(y), duel.get(y+1));
+            
+            duel.add(joueurs.get(y));
+            duel.get(z).setSigne(Signe.X);
+            duel.add(joueurs.get(y+1));
+            duel.get(z+1).setSigne(Signe.O);
+            joueurCourant = duel.get(z);
+            vueGrille = new VueGrille(duel.get(z), duel.get(z+1));
+            this.vueGrille.joueurActif(joueurCourant);
             vueGrille.afficher();
             vueGrille.addObserver(this);
             vueInfo.fermer();
-            joueurCourant = duel.get(y);
-            this.vueGrille.joueurActif(joueurCourant);
-            joueurCourant.setSigne(Signe.X);
             
             }
         }
@@ -122,12 +127,28 @@ public class Controleur implements Observer{
                 int y =((MessageCase) arg).getY();
                 /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
 //                this.grille.getCase(x, y).setEtat_case();
+                    this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
+                    this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
+                    this.grille.addCaseCoché(this.grille.getCase(x, y));
+
                 
-                this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
-                this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
-                this.grille.addCaseCoché(this.grille.getCase(x, y));
-                this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720.png"));
+                if(joueurCourant.getPseudo().equals(duel.get(z).getPseudo())){
+                    System.out.print("boudin");
+                    System.out.print(joueurCourant.getPseudo());
+                    joueurCourant = duel.get(z+1);
+                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720.png"));
+                    System.out.print(joueurCourant.getPseudo());
+                }
+                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {
+                    System.out.print("blabla");
+                    System.out.print(joueurCourant.getPseudo());
+                    joueurCourant = duel.get(z);
+                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/2000px-Orange_circle_100%.svg.png"));
+                System.out.print(joueurCourant.getPseudo());
+                }
+                
                     setNbCaseCoche(getNbCaseCoche()+1);
+                
                 if (getNbCaseCoche()==9){
                     if(grille.Gagnant(joueurCourant.getSigne())){
                        // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3); Augmentation des points.
@@ -143,6 +164,7 @@ public class Controleur implements Observer{
 //                       vueGrille.fermer();
                         victoire = new popUpPartie(joueurCourant);
                         victoire.afficher();
+                        y = y+2;
                     }else{
                     duel.set(0, duel.get(1));
                     duel.set(1, joueurCourant);
