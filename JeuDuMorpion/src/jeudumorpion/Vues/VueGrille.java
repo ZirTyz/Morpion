@@ -13,7 +13,12 @@ import javax.swing.*;
 import java.awt.color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import jeudumorpion.modele.Case;
+import jeudumorpion.modele.Grille;
 import jeudumorpion.modele.Joueur;
+import jeudumorpion.modele.Signe;
+import static jeudumorpion.modele.Signe.NULL;
 import jeudumorpion.utilitaires.*;
 /**
  *
@@ -25,6 +30,9 @@ public class VueGrille extends Observable{
     private final int borderWidth = 4;
     private final int rows = 3;
     private final int cols = 3;
+    private JPanel indicationJoueur;
+    private ArrayList<JButton> boutonsCase= new ArrayList();
+    
     
     public VueGrille(Joueur a, Joueur b){
         //Création de la fenêtre + séparation en différent layout
@@ -81,18 +89,18 @@ public class VueGrille extends Observable{
                 JPanel panelCase = new JPanel();
                 panelCase.setOpaque(false);
                 JButton btnCase = new JButton();
-                btnCase.setPreferredSize(new Dimension(150,100));
+                btnCase.setPreferredSize(new Dimension(600,100));
                 btnCase.setBorderPainted(false);
                 btnCase.setContentAreaFilled(false);
                 btnCase.setFocusPainted(false);
-                
+                boutonsCase.add(btnCase);
                         int x = row;
                         int y = col;
                         btnCase.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent arg0) {
                                 setChanged();
-                                notifyObservers(new MessageCase(Actions.COCHER_CASE, y, x));
+                                notifyObservers(new MessageCase(Actions.COCHER_CASE, y, x, getBoutonsCase().indexOf(btnCase)));
                                 clearChanged();
                             }
                         });
@@ -156,18 +164,23 @@ public class VueGrille extends Observable{
         JPanel panelDroite = new JPanel(new BorderLayout());
         margesPanDroite.add(panelDroite, BorderLayout.CENTER);
         
-        JPanel indicationJoueur = new JPanel(new BorderLayout());
+        indicationJoueur = new JPanel(new BorderLayout());
         panelDroite.add(indicationJoueur, BorderLayout.NORTH);
         
-        JLabel affrontement = new JLabel(a.getPseudo() + " contre joueur " + b.getPseudo(), JLabel.CENTER);
-        indicationJoueur.add(affrontement);
+        JLabel affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
+        indicationJoueur.add(affrontement, BorderLayout.NORTH);
         indicationJoueur.setOpaque(false);
+        
+        //À toi de jouer !
+        //JLabel jouer = new JLabel("À toi de jouer" + nomJoueur, JLabel.CENTER);
+        //indicationJoueur.add(jouer, BorderLayout.CENTER);
       
         // Faire l'est de la vue: Tableau des victoires
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
         panelDroite.add(tab, BorderLayout.CENTER);
         panelDroite.setBackground(fond);
         panelMorp.setBackground(fond);
+
 
     }
 
@@ -177,5 +190,17 @@ public class VueGrille extends Observable{
             public void fermer(){
         this.window.setVisible(false);
     }
+    public void joueurActif(Joueur j){
+        //À toi de jouer !
+        JLabel jouer = new JLabel("À toi de jouer" + j.getPseudo(), JLabel.CENTER);
+        indicationJoueur.add(jouer, BorderLayout.CENTER);
+    }
     
+
+    /**
+     * @return the boutonsCase
+     */
+    public ArrayList<JButton> getBoutonsCase() {
+        return boutonsCase;
+    }
 }

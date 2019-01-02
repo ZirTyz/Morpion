@@ -20,6 +20,7 @@ import jeudumorpion.utilitaires.Actions;
 import jeudumorpion.utilitaires.MessageCase;
 import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpPartie;
 import jeudumorpion.utilitaires.MessageInfosJoueurs;
@@ -41,6 +42,7 @@ public class Controleur implements Observer{
    private popUpPartie victoire;
    private VueInformationsJoueurs vueInfo;
    private int nbj;
+   private int y =0;
    
    public Controleur(){
        
@@ -102,21 +104,29 @@ public class Controleur implements Observer{
                 Joueur j = new Joueur(nomJ);
                 duel.add(j);
             }
-            vueGrille = new VueGrille(duel.get(0), duel.get(1));
+            vueGrille = new VueGrille(duel.get(y), duel.get(y+1));
             vueGrille.afficher();
             vueGrille.addObserver(this);
             vueInfo.fermer();
+            joueurCourant = duel.get(y);
+            this.vueGrille.joueurActif(joueurCourant);
+            joueurCourant.setSigne(Signe.X);
+            
             }
         }
+        
         if (arg instanceof MessageCase){
             if(((MessageCase) arg).getAction()==Actions.COCHER_CASE){
+               
                 int x =((MessageCase) arg).getX();
                 int y =((MessageCase) arg).getY();
                 /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
 //                this.grille.getCase(x, y).setEtat_case();
+                
                 this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
                 this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
-                this.grille.addCaseCoché(this.grille.getCase(x, y));                
+                this.grille.addCaseCoché(this.grille.getCase(x, y));
+                this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720.png"));
                     setNbCaseCoche(getNbCaseCoche()+1);
                 if (getNbCaseCoche()==9){
                     if(grille.Gagnant(joueurCourant.getSigne())){
@@ -147,6 +157,7 @@ public class Controleur implements Observer{
                 }
             }
         }
+        
         /*
         faire le close pour tout fermer
         faire les different Action pour tout les radio bouton des choix du nombre de perso

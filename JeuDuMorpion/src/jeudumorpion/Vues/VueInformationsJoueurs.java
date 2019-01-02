@@ -42,7 +42,7 @@ public class VueInformationsJoueurs extends Observable{
     private int nbJoueurs;
     private JButton chooseColor = new JButton();
     private JButton valider;
-    private HashMap<String, Color> nomsJoueurs = new HashMap();
+    private HashMap<JTextField, Color> nomsJoueurs = new HashMap();
     
     public VueInformationsJoueurs(int nbJoueurs){
         this.nbJoueurs = nbJoueurs;
@@ -100,7 +100,7 @@ public class VueInformationsJoueurs extends Observable{
             panelCentre.add(new JLabel(""));
             panelCentre.add(new JLabel(""));
             nb = nb+1;
-                        nomsJoueurs.put(champPseudo.getText(), ccb.getSelectedColor());
+                        nomsJoueurs.put(champPseudo, ccb.getSelectedColor());
             
         }
         
@@ -128,7 +128,7 @@ public class VueInformationsJoueurs extends Observable{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setChanged();
-                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, nomsJoueurs)); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
+                notifyObservers(new MessageInfosJoueurs(Actions.INSCRIPTION_JOUEUR, copieJoueurs(nomsJoueurs))); ///RETRAVAILLER SUR LE PASSAGE DE COULEUR
                 clearChanged();
             }
         });
@@ -144,11 +144,16 @@ public class VueInformationsJoueurs extends Observable{
         panelMarge.add(panelBas, BorderLayout.CENTER);
         
         
-        
-        
-        
 }
 
+    public HashMap<String, Color> copieJoueurs(HashMap<JTextField, Color> nomsJoueurs){
+        HashMap<String, Color> copie = new HashMap<>();
+        for(JTextField key : nomsJoueurs.keySet()){
+            copie.put(key.getText(), nomsJoueurs.get(key));
+        }
+        return copie;
+        
+    }
         public void afficher() {
         this.window.setVisible(true);
     }

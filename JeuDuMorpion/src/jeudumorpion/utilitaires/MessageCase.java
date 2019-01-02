@@ -14,11 +14,13 @@ import jeudumorpion.modele.Joueur;
 public class MessageCase extends Message{
     private final Integer y;
     private final Integer x;
+    private final Integer numBtn;
 //    private final Joueur joueurCourant;
-    public MessageCase(Actions action, int y,int x/*,Joueur joueur*/){
+    public MessageCase(Actions action, int y,int x, int numBtn/*,Joueur joueur*/){
         super(action);
         this.y=y;
         this.x=x;
+        this.numBtn = numBtn;
 //        this.joueurCourant=joueur;
     }
 
@@ -35,6 +37,13 @@ public class MessageCase extends Message{
      */
     public Integer getX() {
         return x;
+    }
+
+    /**
+     * @return the numBtn
+     */
+    public Integer getNumBtn() {
+        return numBtn;
     }
 
 }

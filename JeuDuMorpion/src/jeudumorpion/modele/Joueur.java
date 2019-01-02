@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package jeudumorpion.modele;
+import java.awt.Color;
 import java.util.ArrayList;
 /**
  *
@@ -13,6 +14,7 @@ public class Joueur {
     private ArrayList<Case> casesCochée = new ArrayList<>();
     private Signe signe;
     private String pseudo;
+
     
     public Joueur(String pseudo){
         this.casesCochée = null;
@@ -47,6 +49,16 @@ public class Joueur {
         this.signe = signe;
     }
 
+    public String signeString(Signe s) {
+        if (s == s.O){
+            return "O";
+        }
+        else{
+            return "X";
+        }
+    }
+
+    
     /**
      * @return the pseudo
      */
