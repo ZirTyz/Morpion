@@ -22,7 +22,9 @@ import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import jeudumorpion.Vues.VueInformationsJoueurs;
+import jeudumorpion.Vues.popUpDuel;
 import jeudumorpion.Vues.popUpPartie;
+import jeudumorpion.Vues.popUpTournois;
 import jeudumorpion.utilitaires.MessageInfosJoueurs;
 /**
  *
@@ -40,10 +42,13 @@ public class Controleur implements Observer{
    private int nbCaseCoche=0;
    private Joueur joueurCourant;
    private popUpPartie victoire;
+   private popUpDuel victoire2;
+   private popUpTournois victoireTourn;
    private VueInformationsJoueurs vueInfo;
    private int nbj;
    private int y =0;
    private int z =0;
+   private int nbTours = 0;
    
    public Controleur(){
        
@@ -56,7 +61,7 @@ public class Controleur implements Observer{
 //       vueGrille.afficher();
 //       vueSpe = new VueSpecification();
 //       vueSpe.afficher();
-                //vueInfo = new VueInformations(nbj);
+                //vueInfo = new VueInformations(nbj);TABLEAU
                 //vueInfo.afficher();
    }
     @Override
@@ -72,6 +77,9 @@ public class Controleur implements Observer{
             }
             if(((Message) arg).getAction()== Actions.TABLEAU){
 //                vueTab = new VueTableau();
+            }
+            if(((Message) arg).getAction()== Actions.TOUR_SUIVANT){
+
             }
             
         }
@@ -116,6 +124,7 @@ public class Controleur implements Observer{
             vueGrille.afficher();
             vueGrille.addObserver(this);
             vueInfo.fermer();
+            nbTours = nbTours+1;
             
             }
         }
@@ -157,9 +166,23 @@ public class Controleur implements Observer{
                     if(grille.Gagnant(joueurCourant.getSigne())){
                        // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3);
 //                       vueGrille.fermer();
+                        
+                        if(nbTours == (nbj - 1)){
+                            if(nbj == 2){
+                                victoire2 = new popUpDuel(joueurCourant);
+                                victoire2.afficher();
+                            }
+                            else{
+                                victoireTourn = new popUpTournois(joueurCourant);
+                                victoireTourn.afficher();
+                            }
+                        }
+                        else{
                         victoire = new popUpPartie(joueurCourant);
                         victoire.afficher();
                         y = y+2;
+                        }
+
                     }else{
                     duel.set(0, duel.get(1));
                     duel.set(1, joueurCourant);
@@ -188,7 +211,6 @@ public class Controleur implements Observer{
             }
             
         }
-        
         /*
         faire le close pour tout fermer
         faire les different Action pour tout les radio bouton des choix du nombre de perso
