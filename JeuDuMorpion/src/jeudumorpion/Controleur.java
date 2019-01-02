@@ -127,24 +127,19 @@ public class Controleur implements Observer{
                 int y =((MessageCase) arg).getY();
                 /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
 //                this.grille.getCase(x, y).setEtat_case();
+            if(this.grille.getCase(x, y).getEtat_case() == Signe.NULL){
+                        
+                    System.out.println("La case est cochée");
                     this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
                     this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
                     this.grille.addCaseCoché(this.grille.getCase(x, y));
 
                 
                 if(joueurCourant.getPseudo().equals(duel.get(z).getPseudo())){
-                    System.out.print("boudin");
-                    System.out.print(joueurCourant.getPseudo());
-                    joueurCourant = duel.get(z+1);
                     this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720.png"));
-                    System.out.print(joueurCourant.getPseudo());
                 }
-                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {
-                    System.out.print("blabla");
-                    System.out.print(joueurCourant.getPseudo());
-                    joueurCourant = duel.get(z);
-                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/2000px-Orange_circle_100%.svg.png"));
-                System.out.print(joueurCourant.getPseudo());
+                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {;
+                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
                 }
                 
                     setNbCaseCoche(getNbCaseCoche()+1);
@@ -172,12 +167,26 @@ public class Controleur implements Observer{
                     }
                         
                      
-                } else{
-                    duel.set(0, duel.get(1));
-                    duel.set(1, joueurCourant);
-                    setJoueurCourant(duel.get(0));
+                }
+               else{
+                    if(joueurCourant.getPseudo().equals(duel.get(z).getPseudo())){
+                        joueurCourant = duel.get(z+1);
+                        this.vueGrille.joueurActif(joueurCourant);
+                }
+                else if (joueurCourant.getPseudo().equals(duel.get(z+1).getPseudo())) {
+                    joueurCourant = duel.get(z);
+                    this.vueGrille.joueurActif(joueurCourant);
+                }
+////                    duel.set(0, duel.get(1));
+////                    duel.set(1, joueurCourant);
+////                    setJoueurCourant(duel.get(0));
                 }
             }
+            else {
+                System.out.println("La case est déjà prise");
+            }
+            }
+            
         }
         
         /*
