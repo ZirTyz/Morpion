@@ -72,7 +72,7 @@ public class Grille {
             
         }
         else if(this.cases[1][0].getEtat_case().equals(s)){ //vertical gauche
-            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[0][2].getEtat_case())){
+            if(s.equals(this.cases[0][0].getEtat_case()) && s.equals(this.cases[2][0].getEtat_case())){
                 return true;    
             } 
             
