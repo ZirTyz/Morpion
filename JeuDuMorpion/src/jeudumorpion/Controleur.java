@@ -120,11 +120,21 @@ public class Controleur implements Observer{
             }
             
             duel.add(joueurs.get(tousJoueurs));
-            duel.get(joueursPatieCourante).setSigne(Signe.X);
+            
+            //duel.get(joueursPatieCourante).setSigne(Signe.X);
+            duel.get(0).setSigne(Signe.X);
+            
             duel.add(joueurs.get(tousJoueurs+1));
-            duel.get(joueursPatieCourante+1).setSigne(Signe.O);
-            joueurCourant = duel.get(joueursPatieCourante);
-            vueGrille = new VueGrille(duel.get(joueursPatieCourante), duel.get(joueursPatieCourante+1));
+            
+//            duel.get(joueursPatieCourante+1).setSigne(Signe.O);
+            duel.get(1).setSigne(Signe.O);
+            
+//            joueurCourant = duel.get(joueursPatieCourante);
+            joueurCourant =duel.get(0);
+            
+//            vueGrille = new VueGrille(duel.get(joueursPatieCourante), duel.get(joueursPatieCourante+1));
+            vueGrille = new VueGrille(duel.get(0), duel.get(1));
+            
             this.vueGrille.joueurActif(joueurCourant);
             vueGrille.afficher();
             vueGrille.addObserver(this);
@@ -192,22 +202,25 @@ public class Controleur implements Observer{
                     duel.set(0, duel.get(1));
                     duel.set(1, joueurCourant);
                     setJoueurCourant(duel.get(0));
+                    this.vueGrille.joueurActif(joueurCourant);
                     }
                         
                      
                 }
                else{
-                    if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
-                        joueurCourant = duel.get(joueursPatieCourante+1);
-                        this.vueGrille.joueurActif(joueurCourant);
-                }
-                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {
-                    joueurCourant = duel.get(joueursPatieCourante);
+                    /* inutile puisque déjà fais en dessous... */
+//                    if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
+//                        joueurCourant = duel.get(joueursPatieCourante+1);
+//                        this.vueGrille.joueurActif(joueurCourant);
+//                }
+//                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {
+//                    joueurCourant = duel.get(joueursPatieCourante);
+//                    this.vueGrille.joueurActif(joueurCourant);
+//                }
+                    duel.set(0, duel.get(1));
+                    duel.set(1, joueurCourant);
+                    setJoueurCourant(duel.get(0));
                     this.vueGrille.joueurActif(joueurCourant);
-                }
-////                    duel.set(0, duel.get(1));
-////                    duel.set(1, joueurCourant);
-////                    setJoueurCourant(duel.get(0));
                 }
             }
             else {

@@ -32,8 +32,8 @@ public class VueGrille extends Observable{
     private final int cols = 3;
     private JPanel indicationJoueur;
     private ArrayList<JButton> boutonsCase= new ArrayList();
-    private JLabel jouer;
-    
+    private JLabel jouer ;
+    private int tour = 0;
     
     public VueGrille(Joueur a, Joueur b){
         //Création de la fenêtre + séparation en différent layout
@@ -190,9 +190,16 @@ public class VueGrille extends Observable{
     }
     public void joueurActif(Joueur j){
         //À toi de jouer !
+        if (tour!=0){
+            indicationJoueur.remove(jouer);
+        
+        }
         jouer = new JLabel("À toi de jouer  " + j.getPseudo(), JLabel.CENTER);
         jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
+
         indicationJoueur.add(jouer, BorderLayout.CENTER);
+        tour = tour+1;
+
     }
     
 
