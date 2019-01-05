@@ -103,6 +103,7 @@ public class VueGrille extends Observable{
                                 setChanged();
                                 notifyObservers(new MessageCase(Actions.COCHER_CASE, y, x, getBoutonsCase().indexOf(btnCase)));
                                 clearChanged();
+                                  btnCase.removeActionListener(this);
                             }
                         });
                         panelCase.add(btnCase);

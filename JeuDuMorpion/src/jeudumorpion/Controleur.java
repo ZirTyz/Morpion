@@ -151,7 +151,7 @@ public class Controleur implements Observer{
                 int y =((MessageCase) arg).getY();
                 /*Joueur courant que le morpion dois connaitre pour changer l'état case avec le signe*/
 //                this.grille.getCase(x, y).setEtat_case();
-            if(this.grille.getCase(x, y).getEtat_case() == Signe.NULL){
+
                         
                     System.out.println("La case est cochée");
                     this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
@@ -159,13 +159,22 @@ public class Controleur implements Observer{
                     this.grille.addCaseCoché(this.grille.getCase(x, y));
 
                 
-                if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
+//                if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
+                if(joueurCourant.getPseudo().equals(duel.get(0).getPseudo())){
                     this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
                 }
-                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {;
+//                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {;
+                else if (joueurCourant.getPseudo().equals(duel.get(1).getPseudo())) {;
                     this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
                 }
                 
+//                if(joueurCourant.getSigne().equals(Signe.X)){
+//                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/miras/NetBeansProjects/Morpion/Morpion/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
+//                }
+//                else if (joueurCourant.getSigne().equals(Signe.O)) {;
+//                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/miras/NetBeansProjects/Morpion/Morpion/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
+//                }
+
                     setNbCaseCoche(getNbCaseCoche()+1);
                 
                 if (getNbCaseCoche()==9){
@@ -222,10 +231,8 @@ public class Controleur implements Observer{
                     setJoueurCourant(duel.get(0));
                     this.vueGrille.joueurActif(joueurCourant);
                 }
-            }
-            else {
-                System.out.println("La case est déjà prise");
-            }
+            
+
             }
             
         }
