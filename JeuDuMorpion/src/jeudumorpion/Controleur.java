@@ -160,13 +160,20 @@ public class Controleur implements Observer{
 
                 
 //                if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
-                if(joueurCourant.getPseudo().equals(duel.get(0).getPseudo())){
-                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
+                if(joueurCourant.getSigne().equals(Signe.X)){
+                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/users/info/etu-s2/mirasl/Morpion/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
                 }
 //                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {;
-                else if (joueurCourant.getPseudo().equals(duel.get(1).getPseudo())) {;
-                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
+                else if (joueurCourant.getSigne().equals(Signe.O)) {;
+                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/users/info/etu-s2/mirasl/Morpion/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
                 }
+//                if(joueurCourant.getPseudo().equals(duel.get(0).getPseudo())){
+//                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));
+//                }
+////                else if (joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante+1).getPseudo())) {;
+//                else if (joueurCourant.getPseudo().equals(duel.get(1).getPseudo())) {;
+//                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/1024px-Cercle_noir_100%.svg_1.png"));;
+//                }
                 
 //                if(joueurCourant.getSigne().equals(Signe.X)){
 //                    this.vueGrille.getBoutonsCase().get(((MessageCase) arg).getNumBtn()).setIcon(new ImageIcon("/home/miras/NetBeansProjects/Morpion/Morpion/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/delete-462216_960_720_1.png"));

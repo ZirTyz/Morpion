@@ -87,11 +87,9 @@ public class VueGrille extends Observable{
         panelMorp.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                JPanel panelCase = new JPanel();
-                panelCase.setOpaque(false);
+
                 JButton btnCase = new JButton();
                 btnCase.setPreferredSize(new Dimension(600,100));
-                btnCase.setBorderPainted(false);
                 btnCase.setContentAreaFilled(false);
                 btnCase.setFocusPainted(false);
                 boutonsCase.add(btnCase);
@@ -103,52 +101,53 @@ public class VueGrille extends Observable{
                                 setChanged();
                                 notifyObservers(new MessageCase(Actions.COCHER_CASE, y, x, getBoutonsCase().indexOf(btnCase)));
                                 clearChanged();
-                                  btnCase.removeActionListener(this);
+                                btnCase.removeActionListener(this);
                             }
                         });
-                        panelCase.add(btnCase);
+                          panelMorp.add(btnCase);  
+
                 if (row == 0) {
                     if (col == 0) {
                         // Top left corner, draw all sides
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                         
                     }
                     else if (col == cols-1){
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, 0, Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, 0, Color.BLACK));
                         
                     }
                     else {
                         // Top edge, draw all sides except left edge
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                     }
                 }
                 else if (row == rows -1){
                     if (col == 0){
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
                     }
                     else if (col == cols -1){
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,0,Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,0,Color.BLACK));
                     }
                     else {
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0,0, 0,borderWidth,Color.BLACK));
                     }
                         
                     }
                 else {
                     if (col == 0) {
                         // Left-hand edge, draw all sides except top
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, borderWidth,Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, borderWidth,Color.BLACK));
                     }
                     else if (col == cols-1){
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, 0,Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0,0, borderWidth, 0,Color.BLACK));
                     }
                     
                     else {
                         // Neither top edge nor left edge, skip both top and left lines
-                        panelCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
+                        btnCase.setBorder(BorderFactory.createMatteBorder(0, 0, borderWidth, borderWidth, Color.BLACK));
                     }
                 }
-                panelMorp.add(panelCase);
+
 
                 
                 
@@ -194,7 +193,7 @@ public class VueGrille extends Observable{
         if (tour!=0){
             indicationJoueur.remove(jouer);
         
-        }
+        } 
         jouer = new JLabel("À toi de jouer  " + j.getPseudo(), JLabel.CENTER);
         jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
 
