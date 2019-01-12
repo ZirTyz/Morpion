@@ -34,8 +34,9 @@ public class VueSpecificationNbJoueurs extends Observable{
         private JRadioButton seven;
         private JRadioButton eight;
         private ImagesInscription deux;
+        private Color fond;
         
-        public VueSpecificationNbJoueurs(){
+        public VueSpecificationNbJoueurs(Color fond){
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -43,6 +44,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(fond);
         window.add(mainPanel) ;
         
         //Première partie de la fenêtre
@@ -73,6 +75,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         //Seconde partie de la fenêtre
         JPanel panelBas = new JPanel(new BorderLayout());
         mainPanel.add(panelBas, BorderLayout.CENTER);
+        panelBas.setOpaque(false);
         JLabel labelTitre = new JLabel("Nombre de joueurs", JLabel.CENTER) ;
         labelTitre.setForeground(Color.BLACK);
         labelTitre.setFont(new Font("Princetown LET", Font.PLAIN, (int) (labelTitre.getFont().getSize() * 2.5)));
@@ -80,12 +83,19 @@ public class VueSpecificationNbJoueurs extends Observable{
         
         
         two = new JRadioButton("2 joueurs");
+        two.setOpaque(false);
         three = new JRadioButton("3 joueurs");
+        three.setOpaque(false);
         four = new JRadioButton("4 joueurs");
+        four.setOpaque(false);
         five = new JRadioButton("5 joueurs");
+        five.setOpaque(false);
         six = new JRadioButton("6 joueurs");
+        six.setOpaque(false);
         seven = new JRadioButton("7 joueurs");
+        seven.setOpaque(false);
         eight = new JRadioButton("8 joueurs");
+        eight.setOpaque(false);
         
         joueurs = new ButtonGroup();
         joueurs.add(two);
@@ -187,6 +197,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         
         JPanel panelFooter = new JPanel(new GridLayout(1,7));
         mainPanel.add(panelFooter, BorderLayout.SOUTH);
+        panelFooter.setOpaque(false);
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));

@@ -61,8 +61,8 @@ public class popUpPartie extends Observable{
         @Override
         public void actionPerformed(ActionEvent ae) {
             setChanged();
-                notifyObservers(new Message(Actions.TOUR_SUIVANT));
-                clearChanged();
+            notifyObservers(new Message(Actions.TOUR_SUIVANT));
+            clearChanged();
         }
     });
     

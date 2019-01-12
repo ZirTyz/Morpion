@@ -22,6 +22,8 @@ public enum Actions {
     RETOUR,
     NOUVELLE_PARTIE,
     INSCRIPTION_JOUEUR,
-    ACCUEIL;
+    ACCUEIL,
+    COLOR_SOMBRE,
+    COLOR_COLOREE;
     
 }

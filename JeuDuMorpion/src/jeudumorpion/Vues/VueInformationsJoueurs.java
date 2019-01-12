@@ -43,8 +43,10 @@ public class VueInformationsJoueurs extends Observable{
     private JButton chooseColor = new JButton();
     private JButton valider;
     private HashMap<JTextField, Color> nomsJoueurs = new HashMap();
+    private Color fond;
     
-    public VueInformationsJoueurs(int nbJoueurs){
+    public VueInformationsJoueurs(int nbJoueurs, Color fond){
+        this.fond = fond;
         this.nbJoueurs = nbJoueurs;
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Informations");
@@ -52,7 +54,6 @@ public class VueInformationsJoueurs extends Observable{
         window.setSize(500, 800);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
-        Color fond = new Color(179, 204, 255);
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(fond);
         window.add(mainPanel) ;

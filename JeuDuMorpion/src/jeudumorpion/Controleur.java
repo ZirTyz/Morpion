@@ -6,6 +6,8 @@
 package jeudumorpion;
 
 
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import jeudumorpion.modele.Case;
 import jeudumorpion.modele.Joueur;
 import jeudumorpion.Vues.VueGrille;
@@ -49,10 +51,11 @@ public class Controleur implements Observer{
    private int tousJoueurs =0;
    private int joueursPatieCourante =0;
    private int nbTours = 0;
+   private Color fond;
    
    public Controleur(){
-       
-       vueSelection=new VueAccueil();
+       fond = new Color(179, 204, 255);
+       vueSelection=new VueAccueil(fond);
        vueSelection.afficher();
        vueSelection.addObserver(this);
 //       Joueur a = new Joueur("Jacques");
@@ -70,7 +73,7 @@ public class Controleur implements Observer{
             Message message = (Message) arg;
             if (((Message) arg).getAction()== Actions.NEWPARTIE){
                 
-                vueSpe = new VueSpecificationNbJoueurs();
+                vueSpe = new VueSpecificationNbJoueurs(fond);
                 vueSpe.afficher();
                 vueSpe.addObserver(this);
                 vueSelection.fermer();
@@ -85,6 +88,14 @@ public class Controleur implements Observer{
             
             if(((Message) arg).getAction()== Actions.TOUR_SUIVANT){
                 
+            }
+            
+            if(message.getAction()== Actions.COLOR_COLOREE){
+                fond = new Color(179, 204, 255);
+            }
+            
+            if(message.getAction()== Actions.COLOR_SOMBRE){
+                fond = new Color(ColorSpace.TYPE_3CLR);
             }
             
         }
@@ -105,7 +116,7 @@ public class Controleur implements Observer{
 //                    vueGrille.addObserver(this);
                 
                 nbj = ((MessageCreation) arg).getNbJoueur();
-                vueInfo = new VueInformationsJoueurs(((MessageCreation) arg).getNbJoueur());
+                vueInfo = new VueInformationsJoueurs(((MessageCreation) arg).getNbJoueur(), fond);
                 vueInfo.afficher();
                 vueInfo.addObserver(this);
                 vueSpe.fermer();
@@ -133,7 +144,7 @@ public class Controleur implements Observer{
             joueurCourant =duel.get(0);
             
 //            vueGrille = new VueGrille(duel.get(joueursPatieCourante), duel.get(joueursPatieCourante+1));
-            vueGrille = new VueGrille(duel.get(0), duel.get(1));
+            vueGrille = new VueGrille(duel.get(0), duel.get(1), fond);
             
             this.vueGrille.joueurActif(joueurCourant);
             vueGrille.afficher();
@@ -243,6 +254,7 @@ public class Controleur implements Observer{
             }
             
         }
+        
         /*
         faire le close pour tout fermer
         faire les different Action pour tout les radio bouton des choix du nombre de perso

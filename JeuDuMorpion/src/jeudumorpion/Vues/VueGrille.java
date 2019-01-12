@@ -34,15 +34,16 @@ public class VueGrille extends Observable{
     private ArrayList<JButton> boutonsCase= new ArrayList();
     private JLabel jouer ;
     private int tour = 0;
+    private Color fond;
     
-    public VueGrille(Joueur a, Joueur b){
+    public VueGrille(Joueur a, Joueur b, Color fond){
         //Création de la fenêtre + séparation en différent layout
+        this.fond = fond;
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         window.setSize(1000, 500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
-        Color fond = new Color(179, 204, 255);
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(fond);
         window.add(mainPanel) ;

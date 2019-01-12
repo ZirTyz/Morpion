@@ -34,8 +34,10 @@ public class VueAccueil extends Observable{
     private final JButton btnCreation;
             private JButton sombre;
         private JButton colore;
+    private Color fond;
 
-    public VueAccueil(){
+    public VueAccueil(Color fond){
+        this.fond = fond;
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         // Définit la taille de la fenêtre en pixels
@@ -47,6 +49,8 @@ public class VueAccueil extends Observable{
         window.add(mainPanel);
         JPanel panelHaut = new JPanel();
         mainPanel.add(panelHaut, BorderLayout.NORTH);
+        mainPanel.setBackground(fond);
+        panelHaut.setOpaque(false);
         //Positionnement titre
         //mainPanel.add(new JLabel(), BorderLayout.NORTH);
         JLabel labelTitre = new JLabel("Jeu du morpion") ;
@@ -58,9 +62,11 @@ public class VueAccueil extends Observable{
         //création zone menu
         JPanel menu= new JPanel(new BorderLayout());
         mainPanel.add(menu,BorderLayout.CENTER);
+        menu.setOpaque(false);
         //menuHaut parti
         JPanel menuHaut = new JPanel(new GridLayout(5,3));
         menu.add(menuHaut,BorderLayout.NORTH);
+        menuHaut.setOpaque(false);
         btnNewPartie = new JButton("Nouvelle Partie");
         btnNewPartie.addActionListener(new ActionListener() {
             @Override
@@ -84,6 +90,7 @@ public class VueAccueil extends Observable{
         }
         JPanel menuBas =new JPanel(new GridLayout(5,5));
         menu.add(menuBas, BorderLayout.CENTER);
+        menuBas.setOpaque(false);
         btnTuto = new JButton("Tutoriel");
         btnCreation = new JButton("Création");
         for (int x=0;x<25;x++){
@@ -98,9 +105,26 @@ public class VueAccueil extends Observable{
             }
         }
                 JPanel panelBas = new JPanel(new GridLayout(3,6)) ;
+                panelBas.setOpaque(false);
         menu.add(panelBas, BorderLayout.SOUTH);
         sombre = new JButton("Sombre");
+        sombre.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new Message(Actions.COLOR_SOMBRE));
+                clearChanged();
+            }
+        });
         colore = new JButton("Colore");
+        colore.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new Message(Actions.COLOR_COLOREE));
+                clearChanged();
+            }
+        });
 
         for(int x =0; x<18;x++){
             if (x==0){
