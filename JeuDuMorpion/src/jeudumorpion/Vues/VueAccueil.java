@@ -149,7 +149,7 @@ public class VueAccueil extends Observable{
     public void afficher() {
         this.window.setVisible(true);
     }
-        public void fermer(){
+    public void fermer(){
         this.window.setVisible(false);
     }
     

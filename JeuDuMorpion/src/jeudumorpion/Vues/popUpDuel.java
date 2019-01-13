@@ -45,7 +45,7 @@ public class popUpDuel extends Observable {
     
     JPanel panelBas = new JPanel(new GridLayout(1,2));
     mainPanel.add(panelBas, BorderLayout.SOUTH);
-    panelBas.add(retour);
+
     retour.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -54,8 +54,8 @@ public class popUpDuel extends Observable {
             clearChanged();
         }
     });
-    
-    panelBas.add(nvxTournois);
+    panelBas.add(retour);
+
     nvxTournois.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -64,7 +64,7 @@ public class popUpDuel extends Observable {
                 clearChanged();
         }
     });
-    
+    panelBas.add(nvxTournois);
 
 }
     public void afficher(){

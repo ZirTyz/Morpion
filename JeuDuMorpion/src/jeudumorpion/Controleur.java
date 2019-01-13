@@ -52,6 +52,7 @@ public class Controleur implements Observer{
    private int joueursPatieCourante =0;
    private int nbTours = 0;
    private Color fond;
+   private int nbMatch=0;
    
    public Controleur(){
        fond = new Color(179, 204, 255);
@@ -196,13 +197,18 @@ public class Controleur implements Observer{
                     setNbCaseCoche(getNbCaseCoche()+1);
                 
                 if (getNbCaseCoche()==9){
-                    if(grille.Gagnant(joueurCourant.getSigne())){
-                       // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3); Augmentation des points.
-//                       vueGrille.fermer();
-                    } else {for (int i=0;i<duel.size();i++){
-                       // joueurs.replace(duel.get(i), joueurs.get(duel.get(i))+1);
-//                       vueGrille.fermer();
-                    }}
+                    if(joueurs.size()==2){
+                        if(grille.Gagnant(joueurCourant.getSigne())){
+                            victoire2 = new popUpDuel(joueurCourant);
+                            victoire2.afficher();
+                            victoire2.addObserver(this);  
+                           // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3); Augmentation des points.
+    //                       vueGrille.fermer();
+                        } else {
+                        }
+                    } else {
+                        
+                    }
                 }
                 else if(getNbCaseCoche()>=5 && getNbCaseCoche()<9){
                     if(grille.Gagnant(joueurCourant.getSigne())){
@@ -213,16 +219,18 @@ public class Controleur implements Observer{
                             if(nbj == 2){
                                 victoire2 = new popUpDuel(joueurCourant);
                                 victoire2.afficher();
-                                                                                      vueGrille.tableauVictoire(duel, nbj);
+                                victoire2.addObserver(this);                                                      vueGrille.tableauVictoire(duel, nbj);
                             }
                             else{
                                 victoireTourn = new popUpTournois(joueurCourant);
                                 victoireTourn.afficher();
+                                victoireTourn.addObserver(this);
                             }
                         }
                         else{
                         victoire = new popUpPartie(joueurCourant);
                         victoire.afficher();
+                        victoire.addObserver(this);
                         y = y+2;
                         }
 
@@ -294,6 +302,42 @@ public class Controleur implements Observer{
         this.joueurCourant = joueurCourant;
     }
    
-    
+    public void tournois(ArrayList<Joueur> joueurs){
+        if(nbMatch<joueurs.size()/2){
+            duel.clear();
+            duel.add(joueurs.get(0));
+            duel.add(joueurs.get(1));
+            duel.get(0).setSigne(Signe.X);
+            duel.get(1).setSigne(Signe.O);
+            joueurs.set(joueurs.size()-1, duel.get(0));
+            joueurs.set(joueurs.size()-1, duel.get(1));
+            this.setJoueurCourant(duel.get(0));
+            nbMatch=nbMatch+1;
+              
+        } else if (nbMatch%joueurs.size()-1!=0){
+                duel.clear();
+                duel.add(joueurs.get(0));
+                duel.add(joueurs.get(2));
+                duel.get(0).setSigne(Signe.X);
+                duel.get(1).setSigne(Signe.O);
+                joueurs.set(joueurs.size()-1, duel.get(0));
+                joueurs.set(joueurs.size()-1, duel.get(1));
+                this.setJoueurCourant(duel.get(0));
+                nbMatch=nbMatch+1;
+        } else if (nbMatch%joueurs.size()-1==0){
+                duel.clear();
+                duel.add(joueurs.get(0));
+                duel.add(joueurs.get(1));
+                duel.get(0).setSigne(Signe.X);
+                duel.get(1).setSigne(Signe.O);
+                joueurs.set(joueurs.size()-1, duel.get(0));
+                joueurs.set(joueurs.size()-1, duel.get(1));
+                this.setJoueurCourant(duel.get(0));
+                nbMatch=nbMatch+1;                
+        }    
+        
+//        this.duel
+        
+    }
     
 }
