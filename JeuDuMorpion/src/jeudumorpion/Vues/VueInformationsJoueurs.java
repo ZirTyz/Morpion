@@ -85,7 +85,7 @@ public class VueInformationsJoueurs extends Observable{
             alignementTextField.add(champPseudo);
             alignementTextField.add(new JLabel(""));
             panelCentre.add(new JLabel("Couleur du joueur : ", JLabel.RIGHT));
-            ColorChooserButton ccb = new ColorChooserButton(Color.lightGray);
+            ColorChooserButton ccb = new ColorChooserButton(Color.BLACK);
             ccb.setFocusPainted(false);
             ccb.setContentAreaFilled(false);
             ccb.setBorderPainted(false);

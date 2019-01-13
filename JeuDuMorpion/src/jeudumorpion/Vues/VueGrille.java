@@ -14,6 +14,7 @@ import java.awt.color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import jeudumorpion.modele.Case;
 import jeudumorpion.modele.Grille;
 import jeudumorpion.modele.Joueur;
@@ -35,6 +36,8 @@ public class VueGrille extends Observable{
     private JLabel jouer ;
     private int tour = 0;
     private Color fond;
+    private JPanel panelTableau;
+    JPanel panelDroite;
     
     public VueGrille(Joueur a, Joueur b, Color fond){
         //Création de la fenêtre + séparation en différent layout
@@ -163,7 +166,7 @@ public class VueGrille extends Observable{
         margesPanDroite.add(new JLabel("                "), BorderLayout.EAST);
         margesPanDroite.add(new JLabel("        "), BorderLayout.WEST);
         margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
-        JPanel panelDroite = new JPanel(new BorderLayout());
+        panelDroite = new JPanel(new BorderLayout());
         margesPanDroite.add(panelDroite, BorderLayout.CENTER);
         
         indicationJoueur = new JPanel(new BorderLayout());
@@ -175,10 +178,11 @@ public class VueGrille extends Observable{
         
       
         // Faire l'est de la vue: Tableau des victoires
-        JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
-        panelDroite.add(tab, BorderLayout.CENTER);
-        panelDroite.setBackground(fond);
-        panelMorp.setBackground(fond);
+        
+       
+        panelDroite.setOpaque(false);
+        panelMorp.setOpaque(false);
+        
 
 
     }
@@ -209,5 +213,18 @@ public class VueGrille extends Observable{
      */
     public ArrayList<JButton> getBoutonsCase() {
         return boutonsCase;
+    }
+    
+    public void tableauVictoire(ArrayList<Joueur> j, int nombrejoueurs){
+        JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
+        int nbj;
+        panelTableau = new JPanel(new GridLayout(2, nombrejoueurs/2));
+        panelDroite.add(panelTableau, BorderLayout.CENTER);
+        Collections.sort(j, new ComparateurPoint());
+        for(int i =0; i < j.size(); i++){
+            JLabel affichJoueur = new JLabel(j.get(i).getPseudo());
+            //JLabel nbpoints = new JLabel(j.get(i).getPoints());
+            panelTableau.add(affichJoueur);
+        }
     }
 }

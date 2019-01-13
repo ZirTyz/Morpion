@@ -14,12 +14,14 @@ public class Joueur {
     private ArrayList<Case> casesCochée = new ArrayList<>();
     private Signe signe;
     private String pseudo;
+    private int points;
 
     
     public Joueur(String pseudo){
         this.casesCochée = null;
         this.signe = null;
         this.pseudo = pseudo;
+        this.points = 0;
     }
 
     
@@ -64,6 +66,20 @@ public class Joueur {
      */
     public String getPseudo() {
         return pseudo;
+    }
+
+    /**
+     * @return the points
+     */
+    public int getPoints() {
+        return points;
+    }
+
+    /**
+     * @param points the points to set
+     */
+    public void setPoints(int points) {
+        this.points = points;
     }
     
     

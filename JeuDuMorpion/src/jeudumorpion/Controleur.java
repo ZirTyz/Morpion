@@ -213,6 +213,7 @@ public class Controleur implements Observer{
                             if(nbj == 2){
                                 victoire2 = new popUpDuel(joueurCourant);
                                 victoire2.afficher();
+                                                                                      vueGrille.tableauVictoire(duel, nbj);
                             }
                             else{
                                 victoireTourn = new popUpTournois(joueurCourant);
