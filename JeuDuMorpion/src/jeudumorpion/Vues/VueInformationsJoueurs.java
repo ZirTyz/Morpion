@@ -133,16 +133,18 @@ public class VueInformationsJoueurs extends Observable{
                 clearChanged();
             }
         });
-        JPanel panelBas = new JPanel(new GridLayout(1, 3));
+        JPanel panelBas = new JPanel(new GridLayout(1, 5));
         panelBas.setOpaque(false);
         panelBas.add(new JLabel(""));
+        panelBas.add(new JLabel(""));
         panelBas.add(valider);
+        panelBas.add(new JLabel(""));
         panelBas.add(new JLabel(""));
         
         JPanel panelMarge = new JPanel();
         panelMarge.setOpaque(false);
-        mainPanel.add(panelMarge, BorderLayout.SOUTH);
-        panelMarge.add(panelBas, BorderLayout.CENTER);
+        mainPanel.add(panelBas, BorderLayout.SOUTH);
+        //panelMarge.add(panelBas, BorderLayout.CENTER);
         
         
 }

@@ -198,13 +198,13 @@ public class VueSpecificationNbJoueurs extends Observable{
         selectNbJoueurs.add(new JLabel(""));
         
         
-        JPanel panelFooter = new JPanel(new GridLayout(1,7));
+        JPanel panelFooter = new JPanel(new GridLayout(1,9));
         mainPanel.add(panelFooter, BorderLayout.SOUTH);
         panelFooter.setOpaque(false);
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
-        
+        panelFooter.add(new JLabel(""));
         valider = new JButton("Valider");
         valider.setBorderPainted(false);
         valider.setContentAreaFilled(false);
@@ -237,7 +237,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
-        
+        panelFooter.add(new JLabel(""));
         
         
 
