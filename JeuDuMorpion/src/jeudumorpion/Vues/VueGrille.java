@@ -35,12 +35,18 @@ public class VueGrille extends Observable{
     private ArrayList<JButton> boutonsCase= new ArrayList();
     private JLabel jouer ;
     private int tour = 0;
+    private int tour2 = 0;
     private Color fond;
     private JPanel panelTableau;
     private JPanel panelDroite;
     private JPanel marges = new JPanel(new BorderLayout());
     private JPanel panelMorp;
     private JPanel mainPanel = new JPanel(new BorderLayout());
+    private JPanel contientJouer;
+    private JLabel affichJoueur;
+    private JLabel nbptsJoueur;
+    private JPanel tableauGauche;
+    private JPanel tableauDroite;
     
     public VueGrille(Joueur a, Joueur b, Color fond){
         //Création de la fenêtre + séparation en différent layout
@@ -98,16 +104,13 @@ public class VueGrille extends Observable{
         margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
         panelDroite = new JPanel(new BorderLayout());
         margesPanDroite.add(panelDroite, BorderLayout.CENTER);
-        
         indicationJoueur = new JPanel(new BorderLayout());
         panelDroite.add(indicationJoueur, BorderLayout.NORTH);
         
         JLabel affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
+        affrontement.setFont(new Font(affrontement.getName(), Font.PLAIN, affrontement.getFont().getSize()*2));
         indicationJoueur.add(affrontement, BorderLayout.NORTH);
         indicationJoueur.setOpaque(false);
-        
-      
-        // Faire l'est de la vue: Tableau des victoires
         
        
         panelDroite.setOpaque(false);
@@ -126,13 +129,17 @@ public class VueGrille extends Observable{
     public void joueurActif(Joueur j){
         //À toi de jouer !
         if (tour!=0){
-            indicationJoueur.remove(jouer);
+            indicationJoueur.remove(contientJouer);
         
         } 
-        jouer = new JLabel("À toi de jouer  " + j.getPseudo(), JLabel.CENTER);
+        jouer = new JLabel("À toi de jouer " + j.getPseudo(), JLabel.CENTER);
         jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
-
-        indicationJoueur.add(jouer, BorderLayout.CENTER);
+        contientJouer = new JPanel(new GridLayout(3,1));
+        contientJouer.add(new JLabel(""), BorderLayout.NORTH);
+        contientJouer.add(jouer, BorderLayout.CENTER);
+        contientJouer.add(new JLabel(""), BorderLayout.SOUTH);
+        contientJouer.setOpaque(false);
+        indicationJoueur.add(contientJouer, BorderLayout.CENTER);
         tour = tour+1;
 
     }
@@ -147,15 +154,30 @@ public class VueGrille extends Observable{
     
     public void tableauVictoire(ArrayList<Joueur> j, int nombrejoueurs){
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
-        int nbj;
-        panelTableau = new JPanel(new GridLayout(2, nombrejoueurs/2));
+        panelTableau = new JPanel(new BorderLayout());
+        panelTableau.add(tab, BorderLayout.NORTH);
+        panelTableau.setOpaque(false);
         panelDroite.add(panelTableau, BorderLayout.CENTER);
+        tableauGauche = new JPanel(new GridLayout(nombrejoueurs, 1));
+        panelTableau.add(tableauGauche, BorderLayout.CENTER);
+        tableauGauche.setOpaque(false);
+        tableauDroite = new JPanel(new GridLayout(nombrejoueurs, 1));
+        panelTableau.add(tableauDroite, BorderLayout.EAST);
+        tableauDroite.setOpaque(false);
         Collections.sort(j);
         for(int i =0; i < j.size(); i++){
-            JLabel affichJoueur = new JLabel(j.get(i).getPseudo());
-            //JLabel nbpoints = new JLabel(j.get(i).getPoints());
-            panelTableau.add(affichJoueur);
+            if (tour2!=0){
+                tableauGauche.remove(affichJoueur);
+            }
+                affichJoueur = new JLabel(j.get(i).getPseudo());
+                tableauGauche.add(affichJoueur, JLabel.CENTER);
+//            if (tour2!=0){
+//                tableauDroite.remove(nbptsJoueur);
+//            }
+//                nbptsJoueur = new JLabel(""+j.get(i).getPoints(), JLabel.WEST);
+//                tableauDroite.add(nbptsJoueur);
         }
+        tour2 = tour2+1;
     }
     
     public void reset(){
