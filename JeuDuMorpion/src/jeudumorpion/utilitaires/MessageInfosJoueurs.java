@@ -13,29 +13,14 @@ import java.util.HashMap;
  *
  * @author rose
  */
-public class MessageInfosJoueurs {
-    private Actions action;
+public class MessageInfosJoueurs extends Message{
     private Color couleur;
     private HashMap<String, Color> pseudoJoueur;
     
     public MessageInfosJoueurs(Actions action, HashMap<String, Color> pseudoJoueur){
-        this.action = action;
+        super(action);
         this.couleur = couleur;
         this.pseudoJoueur = pseudoJoueur;
-    }
-
-    /**
-     * @return the action
-     */
-    public Actions getAction() {
-        return action;
-    }
-
-    /**
-     * @return the couleur
-     */
-    public Color getCouleur() {
-        return couleur;
     }
 
     /**
