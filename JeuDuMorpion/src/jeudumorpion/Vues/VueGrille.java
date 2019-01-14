@@ -37,7 +37,10 @@ public class VueGrille extends Observable{
     private int tour = 0;
     private Color fond;
     private JPanel panelTableau;
-    JPanel panelDroite;
+    private JPanel panelDroite;
+    private JPanel marges = new JPanel(new BorderLayout());
+    private JPanel panelMorp;
+    private JPanel mainPanel = new JPanel(new BorderLayout());
     
     public VueGrille(Joueur a, Joueur b, Color fond){
         //Création de la fenêtre + séparation en différent layout
@@ -47,7 +50,7 @@ public class VueGrille extends Observable{
         window.setSize(1000, 500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
-        JPanel mainPanel = new JPanel(new BorderLayout());
+ 
         mainPanel.setBackground(fond);
         window.add(mainPanel) ;
         JPanel panelHaut = new JPanel(new BorderLayout()) ;
@@ -69,10 +72,10 @@ public class VueGrille extends Observable{
         retour.setFocusPainted(false);
         
         //Marge autour des cases du morpion
-        JPanel marges = new JPanel(new BorderLayout());
+
         
         mainPanel.add(marges, BorderLayout.CENTER);
-        JPanel panelMorp = new JPanel( new GridLayout(rows,cols));
+        panelMorp = new JPanel( new GridLayout(rows,cols));
         marges.add(new JLabel("        "), BorderLayout.NORTH);
         marges.add(new JLabel("        "), BorderLayout.WEST );
         marges.add(new JLabel("        "), BorderLayout.SOUTH );
@@ -83,6 +86,86 @@ public class VueGrille extends Observable{
         
         
         //Cases du morpion
+        this.initGrille();
+
+        // Faire l'est de la vue: Joueur a contre joueur b
+        JPanel margesPanDroite = new JPanel(new BorderLayout());
+        margesPanDroite.setOpaque(false);
+        mainPanel.add(margesPanDroite, BorderLayout.EAST);
+        margesPanDroite.add(new JLabel(" "), BorderLayout.NORTH);
+        margesPanDroite.add(new JLabel("                "), BorderLayout.EAST);
+        margesPanDroite.add(new JLabel("        "), BorderLayout.WEST);
+        margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
+        panelDroite = new JPanel(new BorderLayout());
+        margesPanDroite.add(panelDroite, BorderLayout.CENTER);
+        
+        indicationJoueur = new JPanel(new BorderLayout());
+        panelDroite.add(indicationJoueur, BorderLayout.NORTH);
+        
+        JLabel affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
+        indicationJoueur.add(affrontement, BorderLayout.NORTH);
+        indicationJoueur.setOpaque(false);
+        
+      
+        // Faire l'est de la vue: Tableau des victoires
+        
+       
+        panelDroite.setOpaque(false);
+
+        
+
+
+    }
+
+    public void afficher() {
+        this.window.setVisible(true);
+    }
+            public void fermer(){
+        this.window.setVisible(false);
+    }
+    public void joueurActif(Joueur j){
+        //À toi de jouer !
+        if (tour!=0){
+            indicationJoueur.remove(jouer);
+        
+        } 
+        jouer = new JLabel("À toi de jouer  " + j.getPseudo(), JLabel.CENTER);
+        jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
+
+        indicationJoueur.add(jouer, BorderLayout.CENTER);
+        tour = tour+1;
+
+    }
+    
+
+    /**
+     * @return the boutonsCase
+     */
+    public ArrayList<JButton> getBoutonsCase() {
+        return boutonsCase;
+    }
+    
+    public void tableauVictoire(ArrayList<Joueur> j, int nombrejoueurs){
+        JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
+        int nbj;
+        panelTableau = new JPanel(new GridLayout(2, nombrejoueurs/2));
+        panelDroite.add(panelTableau, BorderLayout.CENTER);
+        Collections.sort(j, new ComparateurPoint());
+        for(int i =0; i < j.size(); i++){
+            JLabel affichJoueur = new JLabel(j.get(i).getPseudo());
+            //JLabel nbpoints = new JLabel(j.get(i).getPoints());
+            panelTableau.add(affichJoueur);
+        }
+    }
+    
+    public void reset(){
+        marges.remove(panelMorp);
+        panelMorp = new JPanel( new GridLayout(rows,cols));
+        marges.add(panelMorp, BorderLayout.CENTER);
+        this.initGrille();
+    }
+    
+    public void initGrille(){
         Dimension d = new Dimension(mainPanel.getWidth()/2, mainPanel.getHeight());
         
         
@@ -93,7 +176,6 @@ public class VueGrille extends Observable{
             for (int col = 0; col < cols; col++) {
 
                 JButton btnCase = new JButton();
-                btnCase.setPreferredSize(new Dimension(600,100));
                 btnCase.setContentAreaFilled(false);
                 btnCase.setFocusPainted(false);
                 boutonsCase.add(btnCase);
@@ -155,76 +237,8 @@ public class VueGrille extends Observable{
 
                 
                 
-    }
-}
-
-        // Faire l'est de la vue: Joueur a contre joueur b
-        JPanel margesPanDroite = new JPanel(new BorderLayout());
-        margesPanDroite.setOpaque(false);
-        mainPanel.add(margesPanDroite, BorderLayout.EAST);
-        margesPanDroite.add(new JLabel(" "), BorderLayout.NORTH);
-        margesPanDroite.add(new JLabel("                "), BorderLayout.EAST);
-        margesPanDroite.add(new JLabel("        "), BorderLayout.WEST);
-        margesPanDroite.add(new JLabel(" "), BorderLayout.SOUTH );
-        panelDroite = new JPanel(new BorderLayout());
-        margesPanDroite.add(panelDroite, BorderLayout.CENTER);
-        
-        indicationJoueur = new JPanel(new BorderLayout());
-        panelDroite.add(indicationJoueur, BorderLayout.NORTH);
-        
-        JLabel affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
-        indicationJoueur.add(affrontement, BorderLayout.NORTH);
-        indicationJoueur.setOpaque(false);
-        
-      
-        // Faire l'est de la vue: Tableau des victoires
-        
-       
-        panelDroite.setOpaque(false);
-        panelMorp.setOpaque(false);
-        
-
-
-    }
-
-    public void afficher() {
-        this.window.setVisible(true);
-    }
-            public void fermer(){
-        this.window.setVisible(false);
-    }
-    public void joueurActif(Joueur j){
-        //À toi de jouer !
-        if (tour!=0){
-            indicationJoueur.remove(jouer);
-        
-        } 
-        jouer = new JLabel("À toi de jouer  " + j.getPseudo(), JLabel.CENTER);
-        jouer.setFont(new Font("Princetown LET", Font.PLAIN, (int) (jouer.getFont().getSize() * 1.5)));
-
-        indicationJoueur.add(jouer, BorderLayout.CENTER);
-        tour = tour+1;
-
-    }
-    
-
-    /**
-     * @return the boutonsCase
-     */
-    public ArrayList<JButton> getBoutonsCase() {
-        return boutonsCase;
-    }
-    
-    public void tableauVictoire(ArrayList<Joueur> j, int nombrejoueurs){
-        JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
-        int nbj;
-        panelTableau = new JPanel(new GridLayout(2, nombrejoueurs/2));
-        panelDroite.add(panelTableau, BorderLayout.CENTER);
-        Collections.sort(j, new ComparateurPoint());
-        for(int i =0; i < j.size(); i++){
-            JLabel affichJoueur = new JLabel(j.get(i).getPseudo());
-            //JLabel nbpoints = new JLabel(j.get(i).getPoints());
-            panelTableau.add(affichJoueur);
+            }
         }
+                panelMorp.setOpaque(false);
     }
 }

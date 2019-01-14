@@ -60,7 +60,7 @@ public class popUpDuel extends Observable {
         @Override
         public void actionPerformed(ActionEvent ae) {
             setChanged();
-                notifyObservers(new Message(Actions.NOUVELLE_PARTIE));
+                notifyObservers(new Message(Actions.REMATCH));
                 clearChanged();
         }
     });
@@ -71,6 +71,5 @@ public class popUpDuel extends Observable {
         this.frame.setVisible(true);
     }
         public void fermer(){
-        this.frame.setVisible(false);
-    }
+this.frame.dispose();    }
 }

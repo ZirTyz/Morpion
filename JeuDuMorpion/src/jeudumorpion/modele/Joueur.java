@@ -6,6 +6,7 @@
 package jeudumorpion.modele;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  *
  * @author chapellr
@@ -15,6 +16,7 @@ public class Joueur {
     private Signe signe;
     private String pseudo;
     private int points;
+    private ArrayList<Joueur> joueurAffronté = new ArrayList<>();
 
     
     public Joueur(String pseudo){
@@ -81,6 +83,14 @@ public class Joueur {
     public void setPoints(int points) {
         this.points = points;
     }
-    
+    public void ajouterJ(Joueur j){
+        this.joueurAffronté.add(j);
+    }
+    public void remove(Joueur j){
+        joueurAffronté.remove(j);
+    }
+    public ArrayList<Joueur> getJoueurA(){
+        return joueurAffronté;
+    }
     
 }

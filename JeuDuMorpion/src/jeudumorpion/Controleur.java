@@ -49,6 +49,7 @@ public class Controleur implements Observer{
    private VueInformationsJoueurs vueInfo;
    private int nbj;
    private int tousJoueurs =0;
+   private int jChoisie =0;
    private int joueursPatieCourante =0;
    private int nbTours = 0;
    private Color fond;
@@ -91,6 +92,23 @@ public class Controleur implements Observer{
                 
             }
             
+            if(((Message) arg).getAction()== Actions.REMATCH){
+                
+                duel.set(0, duel.get(1));
+                duel.set(1, joueurCourant);
+                setJoueurCourant(duel.get(0));
+                
+                this.grille.reset();
+                
+                this.vueGrille.reset();
+                this.vueGrille.joueurActif(joueurCourant);
+                this.vueGrille.addObserver(this);
+
+                this.victoire2.fermer();
+
+                nbCaseCoche=0;
+            }
+            
             if(message.getAction()== Actions.COLOR_COLOREE){
                 fond = new Color(179, 204, 255);
             }
@@ -130,19 +148,20 @@ public class Controleur implements Observer{
                 Joueur j = new Joueur(nomJ);
                 joueurs.add(j);
             }
-            
-            duel.add(joueurs.get(tousJoueurs));
-            
-            //duel.get(joueursPatieCourante).setSigne(Signe.X);
-            duel.get(0).setSigne(Signe.X);
-            
-            duel.add(joueurs.get(tousJoueurs+1));
-            
-//            duel.get(joueursPatieCourante+1).setSigne(Signe.O);
-            duel.get(1).setSigne(Signe.O);
-            
-//            joueurCourant = duel.get(joueursPatieCourante);
-            joueurCourant =duel.get(0);
+            this.initTournois(joueurs);
+            this.tournois(joueurs);
+//            duel.add(joueurs.get(tousJoueurs));
+//            
+//            //duel.get(joueursPatieCourante).setSigne(Signe.X);
+//            duel.get(0).setSigne(Signe.X);
+//            
+//            duel.add(joueurs.get(tousJoueurs+1));
+//            
+////            duel.get(joueursPatieCourante+1).setSigne(Signe.O);
+//            duel.get(1).setSigne(Signe.O);
+//            
+////            joueurCourant = duel.get(joueursPatieCourante);
+//            joueurCourant =duel.get(0);
             
 //            vueGrille = new VueGrille(duel.get(joueursPatieCourante), duel.get(joueursPatieCourante+1));
             vueGrille = new VueGrille(duel.get(0), duel.get(1), fond);
@@ -168,7 +187,7 @@ public class Controleur implements Observer{
                     System.out.println("La case est cochée");
                     this.grille.getCase(x, y).setJoueurAyantCoché(joueurCourant);
                     this.grille.getCase(x, y).setEtat_case(joueurCourant.getSigne());
-                    this.grille.addCaseCoché(this.grille.getCase(x, y));
+//                    this.grille.addCaseCoché(this.grille.getCase(x, y));
 
                 
 //                if(joueurCourant.getPseudo().equals(duel.get(joueursPatieCourante).getPseudo())){
@@ -302,42 +321,74 @@ public class Controleur implements Observer{
         this.joueurCourant = joueurCourant;
     }
    
-    public void tournois(ArrayList<Joueur> joueurs){
-        if(nbMatch<joueurs.size()/2){
-            duel.clear();
-            duel.add(joueurs.get(0));
-            duel.add(joueurs.get(1));
-            duel.get(0).setSigne(Signe.X);
-            duel.get(1).setSigne(Signe.O);
-            joueurs.set(joueurs.size()-1, duel.get(0));
-            joueurs.set(joueurs.size()-1, duel.get(1));
-            this.setJoueurCourant(duel.get(0));
-            nbMatch=nbMatch+1;
-              
-        } else if (nbMatch%joueurs.size()-1!=0){
-                duel.clear();
-                duel.add(joueurs.get(0));
-                duel.add(joueurs.get(2));
-                duel.get(0).setSigne(Signe.X);
-                duel.get(1).setSigne(Signe.O);
-                joueurs.set(joueurs.size()-1, duel.get(0));
-                joueurs.set(joueurs.size()-1, duel.get(1));
-                this.setJoueurCourant(duel.get(0));
-                nbMatch=nbMatch+1;
-        } else if (nbMatch%joueurs.size()-1==0){
-                duel.clear();
-                duel.add(joueurs.get(0));
-                duel.add(joueurs.get(1));
-                duel.get(0).setSigne(Signe.X);
-                duel.get(1).setSigne(Signe.O);
-                joueurs.set(joueurs.size()-1, duel.get(0));
-                joueurs.set(joueurs.size()-1, duel.get(1));
-                this.setJoueurCourant(duel.get(0));
-                nbMatch=nbMatch+1;                
-        }    
+    public void initTournois(ArrayList<Joueur> joueurs){
+//        if(nbMatch<joueurs.size()/2){
+//            duel.clear();
+//            duel.add(joueurs.get(0));
+//            duel.add(joueurs.get(1));
+//            duel.get(0).setSigne(Signe.X);
+//            duel.get(1).setSigne(Signe.O);
+//            joueurs.set(joueurs.size()-1, duel.get(0));
+//            joueurs.set(joueurs.size()-1, duel.get(1));
+//            this.setJoueurCourant(duel.get(0));
+//            nbMatch=nbMatch+1;
+//              
+//        } else if (nbMatch%joueurs.size()-1!=0){
+//                duel.clear();
+//                duel.add(joueurs.get(0));
+//                duel.add(joueurs.get(2));
+//                duel.get(0).setSigne(Signe.X);
+//                duel.get(1).setSigne(Signe.O);
+//                joueurs.set(joueurs.size()-1, duel.get(0));
+//                joueurs.set(joueurs.size()-1, duel.get(1));
+//                this.setJoueurCourant(duel.get(0));
+//                nbMatch=nbMatch+1;
+//        } else if (nbMatch%joueurs.size()-1==0){
+//                duel.clear();
+//                duel.add(joueurs.get(0));
+//                duel.add(joueurs.get(1));
+//                duel.get(0).setSigne(Signe.X);
+//                duel.get(1).setSigne(Signe.O);
+//                joueurs.set(joueurs.size()-1, duel.get(0));
+//                joueurs.set(joueurs.size()-1, duel.get(1));
+//                this.setJoueurCourant(duel.get(0));
+//                nbMatch=nbMatch+1;                
+//        }   
+        for(int x = 0;x<joueurs.size()-1;x++)
+            joueurs.get(x).ajouterJ(joueurs.get(x+1));
         
-//        this.duel
+        }
+    public void tournois(ArrayList<Joueur> j){
+        if (j.get(0).getJoueurA()!=null){
+            if (jChoisie!=nbj){
+                if(j.get(jChoisie).getJoueurA() !=null){
+                    duel.clear();
+                    duel.add(j.get(jChoisie));
+                    duel.add(j.get(jChoisie).getJoueurA().get(0));
+                    duel.get(0).setSigne(Signe.X);
+                    duel.get(1).setSigne(Signe.O);
+                    joueurCourant =duel.get(0);
+                    j.get(jChoisie).getJoueurA().remove(0);
+                    jChoisie=jChoisie+1;
+                } else {
+                    jChoisie=jChoisie+1;
+                    this.tournois(j);
+
+                }
+            }else {
+                jChoisie=0;
+                this.tournois(j);
+
+            }
+        }
+        else {
+            System.out.println("tout les matchs sont fait");
+//            vueTableau tableau = new vueTableau(j);
+        }
         
     }
+//        this.duel
+        
+    
     
 }

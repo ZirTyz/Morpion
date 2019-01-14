@@ -11,7 +11,7 @@ import jeudumorpion.modele.Joueur;
  *
  * @author chapellr
  */
-public class Case {
+public class Case implements Comparable<Case>{
 
     private int numCase;
     private Joueur joueurAyantCoché;
@@ -66,5 +66,16 @@ public class Case {
      */
     public void setEtat_case(Signe etat_case) {
         this.etat_case = etat_case;
+    }
+
+    @Override
+    public int compareTo(Case arg0) {
+        if (this.numCase<arg0.numCase){
+            return -1;
+        }
+        else if (this.numCase==arg0.numCase){
+            return 0;
+        }
+        else return 1;
     }
 }
