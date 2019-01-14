@@ -25,6 +25,7 @@ public enum Actions {
     ACCUEIL,
     COLOR_SOMBRE,
     MATCHSUIVANT,
-    COLOR_COLOREE;
+    COLOR_COLOREE,
+    REGLE;
     
 }

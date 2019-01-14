@@ -24,6 +24,7 @@ import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import jeudumorpion.Vues.RegleDuJeu;
 import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpDuel;
 import jeudumorpion.Vues.popUpPartie;
@@ -55,6 +56,7 @@ public class Controleur implements Observer{
    private int nbTours = 0;
    private Color fond;
    private int nbMatch=0;
+   private RegleDuJeu regle;
    
    public Controleur(){
        //fond = new Color(179, 204, 255);
@@ -129,6 +131,11 @@ public class Controleur implements Observer{
                 vueSelection.getSombre().setEnabled(false);
                 vueSelection.getColore().setEnabled(true);
                 
+            }
+            if(message.getAction()== Actions.REGLE){
+                regle = new RegleDuJeu();
+                regle.afficher();
+                vueSelection.fermer();
             }
             
         }

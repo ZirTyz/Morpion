@@ -92,7 +92,15 @@ public class VueAccueil extends Observable{
         JPanel menuBas =new JPanel(new GridLayout(5,5));
         menu.add(menuBas, BorderLayout.CENTER);
         menuBas.setOpaque(false);
-        btnTuto = new JButton("Tutoriel");
+        btnTuto = new JButton("Règles");
+        btnTuto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new Message(Actions.REGLE));
+                clearChanged();
+            }
+        });
         btnCreation = new JButton("Création");
         for (int x=0;x<25;x++){
             if (x==1){
