@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.JComponent;
@@ -35,6 +37,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         private JRadioButton eight;
         private ImagesInscription deux;
         private Color fond;
+        private JButton valider;
         
         public VueSpecificationNbJoueurs(Color fond){
         //Création de la fenêtre + séparation en différent layout
@@ -201,12 +204,28 @@ public class VueSpecificationNbJoueurs extends Observable{
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
         panelFooter.add(new JLabel(""));
-        panelFooter.add(new JLabel(""));
-        panelFooter.add(new JLabel(""));
-        panelFooter.add(new JLabel(""));
-        JButton btnValider = new JButton("Valider");
-        panelFooter.add(btnValider, BorderLayout.CENTER);
-        btnValider.addActionListener(new ActionListener() {
+        
+        valider = new JButton("Valider");
+        valider.setBorderPainted(false);
+        valider.setContentAreaFilled(false);
+        valider.addMouseListener( new MouseAdapter() {
+            public void mouseEntered(MouseEvent me) {
+                valider.setBorderPainted(true);
+                valider.setContentAreaFilled(true);
+                Color btn = new Color(179, 12, 254);
+                TextBubbleBorder abB = new TextBubbleBorder(Color.BLACK,1,5,0);
+                valider.setBorder(abB);
+                valider.setOpaque(false);
+            }
+
+            public void mouseExited(MouseEvent me) {
+                valider.setBorderPainted(false);
+                valider.setContentAreaFilled(false);
+            }
+        });
+        
+        panelFooter.add(valider, BorderLayout.CENTER);
+        valider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setChanged();
@@ -214,6 +233,12 @@ public class VueSpecificationNbJoueurs extends Observable{
                 clearChanged();
             }
         });
+        
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        panelFooter.add(new JLabel(""));
+        
+        
         
 
 }
