@@ -11,7 +11,7 @@ import java.util.Collections;
  *
  * @author chapellr
  */
-public class Joueur {
+public class Joueur implements Comparable<Joueur>{
     private ArrayList<Case> casesCochée = new ArrayList<>();
     private Signe signe;
     private String pseudo;
@@ -91,6 +91,17 @@ public class Joueur {
     }
     public ArrayList<Joueur> getJoueurA(){
         return joueurAffronté;
+    }
+
+    @Override
+    public int compareTo(Joueur arg0) {
+        if(this.getPoints()<arg0.getPoints()){
+            return -1;
+        }
+        else if(this.getPoints()==arg0.getPoints()){
+            return 0;
+        }
+        else return 1;
     }
     
 }

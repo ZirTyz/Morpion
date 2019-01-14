@@ -150,7 +150,7 @@ public class VueGrille extends Observable{
         int nbj;
         panelTableau = new JPanel(new GridLayout(2, nombrejoueurs/2));
         panelDroite.add(panelTableau, BorderLayout.CENTER);
-        Collections.sort(j, new ComparateurPoint());
+        Collections.sort(j);
         for(int i =0; i < j.size(); i++){
             JLabel affichJoueur = new JLabel(j.get(i).getPseudo());
             //JLabel nbpoints = new JLabel(j.get(i).getPoints());

@@ -387,7 +387,7 @@ public class Controleur implements Observer{
         }
         
     }
-//        this.duel
+//        ajouter les points et enfin travailler les vues...
         
     
     
