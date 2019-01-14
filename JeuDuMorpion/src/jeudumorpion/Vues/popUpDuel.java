@@ -70,6 +70,7 @@ public class popUpDuel extends Observable {
     public void afficher(){
         this.frame.setVisible(true);
     }
-        public void fermer(){
-this.frame.dispose();    }
+     public void fermer(){
+        this.frame.dispose();    
+    }
 }

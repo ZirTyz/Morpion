@@ -111,6 +111,7 @@ public class Controleur implements Observer{
             
             if(message.getAction()== Actions.COLOR_COLOREE){
                 fond = new Color(179, 204, 255);
+//                vueSelection.setFond(fond);
             }
             
             if(message.getAction()== Actions.COLOR_SOMBRE){
