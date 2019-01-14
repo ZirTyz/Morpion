@@ -80,8 +80,8 @@ public class Joueur implements Comparable<Joueur>{
     /**
      * @param points the points to set
      */
-    public void setPoints(int points) {
-        this.points = points;
+    public void addPoint(int points) {
+        this.points = this.getPoints() + points;
     }
     public void ajouterJ(Joueur j){
         this.joueurAffronté.add(j);
@@ -91,6 +91,10 @@ public class Joueur implements Comparable<Joueur>{
     }
     public ArrayList<Joueur> getJoueurA(){
         return joueurAffronté;
+    }
+    
+    public void Shuffle(){
+        Collections.shuffle(joueurAffronté);
     }
 
     @Override

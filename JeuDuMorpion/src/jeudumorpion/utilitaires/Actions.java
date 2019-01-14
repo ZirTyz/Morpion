@@ -24,6 +24,7 @@ public enum Actions {
     INSCRIPTION_JOUEUR,
     ACCUEIL,
     COLOR_SOMBRE,
+    MATCHSUIVANT,
     COLOR_COLOREE;
     
 }

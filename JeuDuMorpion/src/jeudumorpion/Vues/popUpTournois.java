@@ -61,7 +61,7 @@ public class popUpTournois extends Observable{
         @Override
         public void actionPerformed(ActionEvent ae) {
             setChanged();
-                notifyObservers(new Message(Actions.REMATCH));
+                notifyObservers(new Message(Actions.MATCHSUIVANT));
                 clearChanged();
         }
     });
