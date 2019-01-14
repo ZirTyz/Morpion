@@ -153,4 +153,5 @@ public class VueAccueil extends Observable{
         this.window.setVisible(false);
     }
     
+    
 }

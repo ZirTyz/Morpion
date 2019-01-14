@@ -84,7 +84,7 @@ public class Controleur implements Observer{
 //                vueTab = new VueTableau();
             }
             if(((Message) arg).getAction()== Actions.ACCUEIL){
-               vueSelection.afficher(); ///// ICI PROBLEME
+               vueSelection.afficher();
                vueSelection.addObserver(this);
             }
             
@@ -110,12 +110,14 @@ public class Controleur implements Observer{
                 resetGrilles();
             }
             if(message.getAction()== Actions.COLOR_COLOREE){
-                fond = new Color(179, 204, 255);
-//                vueSelection.setFond(fond);
+                //fond = new Color(179, 204, 255);
+                setFond(new Color(239, 125, 49));
+                
             }
             
             if(message.getAction()== Actions.COLOR_SOMBRE){
-                fond = new Color(ColorSpace.TYPE_3CLR);
+                setFond(new Color(77, 149, 145));
+
             }
             
         }
@@ -432,6 +434,13 @@ public class Controleur implements Observer{
                 nbCaseCoche=0;
     }
 //        ajouter les points et enfin travailler les vues...
+
+    /**
+     * @param fond the fond to set
+     */
+    public void setFond(Color fond) {
+        this.fond = fond;
+    }
         
     
     
