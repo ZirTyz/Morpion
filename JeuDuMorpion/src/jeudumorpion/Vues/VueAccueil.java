@@ -34,12 +34,11 @@ public class VueAccueil extends Observable{
     private final JButton btnTableauS;
     private final JButton btnTuto;
     private final JButton btnCreation;
-            private JButton sombre;
-        private JButton colore;
-    private Color fond;
+    private JButton sombre;
+    private JButton colore;
+    private JPanel mainPanel;
 
-    public VueAccueil(Color fond){
-        this.fond = fond;
+    public VueAccueil(){
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         // Définit la taille de la fenêtre en pixels
@@ -47,11 +46,11 @@ public class VueAccueil extends Observable{
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
         
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel = new JPanel(new BorderLayout());
         window.add(mainPanel);
         JPanel panelHaut = new JPanel();
         mainPanel.add(panelHaut, BorderLayout.NORTH);
-        mainPanel.setBackground(fond);
+
         panelHaut.setOpaque(false);
         //Positionnement titre
         //mainPanel.add(new JLabel(), BorderLayout.NORTH);
@@ -110,6 +109,7 @@ public class VueAccueil extends Observable{
                 panelBas.setOpaque(false);
         menu.add(panelBas, BorderLayout.SOUTH);
         sombre = new JButton("Sombre");
+        sombre.setEnabled(false);
         sombre.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -147,10 +147,34 @@ public class VueAccueil extends Observable{
         }
     }
     public void afficher() {
-        this.window.setVisible(true);
+        this.getWindow().setVisible(true);
     }
     public void fermer(){
-        this.window.setVisible(false);
+        this.getWindow().setVisible(false);
+    }
+
+    public void setBackgroundColorAcceuil(Color couleur){
+        mainPanel.setBackground(couleur);
+    }
+    /**
+     * @return the window
+     */
+    public JFrame getWindow() {
+        return window;
+    }
+
+    /**
+     * @return the sombre
+     */
+    public JButton getSombre() {
+        return sombre;
+    }
+
+    /**
+     * @return the colore
+     */
+    public JButton getColore() {
+        return colore;
     }
     
     

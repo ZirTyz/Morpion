@@ -23,6 +23,7 @@ import jeudumorpion.utilitaires.MessageCase;
 import jeudumorpion.utilitaires.MessageCreation;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpDuel;
 import jeudumorpion.Vues.popUpPartie;
@@ -56,8 +57,11 @@ public class Controleur implements Observer{
    private int nbMatch=0;
    
    public Controleur(){
-       fond = new Color(179, 204, 255);
-       vueSelection=new VueAccueil(fond);
+       //fond = new Color(179, 204, 255);
+       
+       vueSelection=new VueAccueil();
+       setFond(new Color(77, 149, 145));
+        vueSelection.setBackgroundColorAcceuil(fond);
        vueSelection.afficher();
        vueSelection.addObserver(this);
 //       Joueur a = new Joueur("Jacques");
@@ -112,12 +116,19 @@ public class Controleur implements Observer{
             if(message.getAction()== Actions.COLOR_COLOREE){
                 //fond = new Color(179, 204, 255);
                 setFond(new Color(239, 125, 49));
+                vueSelection.setBackgroundColorAcceuil(fond);
+                vueSelection.getSombre().setEnabled(true);
+                vueSelection.getColore().setEnabled(false);
                 
             }
             
             if(message.getAction()== Actions.COLOR_SOMBRE){
+                
                 setFond(new Color(77, 149, 145));
-
+                vueSelection.setBackgroundColorAcceuil(fond);
+                vueSelection.getSombre().setEnabled(false);
+                vueSelection.getColore().setEnabled(true);
+                
             }
             
         }
