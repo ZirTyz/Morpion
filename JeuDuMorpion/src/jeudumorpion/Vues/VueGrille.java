@@ -43,10 +43,12 @@ public class VueGrille extends Observable{
     private JPanel panelMorp;
     private JPanel mainPanel = new JPanel(new BorderLayout());
     private JPanel contientJouer;
-    private JLabel affichJoueur;
+    private JLabel nomJoueur;
+    private JLabel pointJoueur;
     private JLabel nbptsJoueur;
     private JPanel tableauGauche;
     private JPanel tableauDroite;
+    private JLabel affrontement; 
     
     public VueGrille(Joueur a, Joueur b, Color fond){
         //Création de la fenêtre + séparation en différent layout
@@ -107,7 +109,7 @@ public class VueGrille extends Observable{
         indicationJoueur = new JPanel(new BorderLayout());
         panelDroite.add(indicationJoueur, BorderLayout.NORTH);
         
-        JLabel affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
+        affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
         affrontement.setFont(new Font(affrontement.getName(), Font.PLAIN, affrontement.getFont().getSize()*2));
         indicationJoueur.add(affrontement, BorderLayout.NORTH);
         indicationJoueur.setOpaque(false);
@@ -123,8 +125,17 @@ public class VueGrille extends Observable{
     public void afficher() {
         this.window.setVisible(true);
     }
-            public void fermer(){
+    public void fermer(){
         this.window.setVisible(false);
+    }
+    
+    public void setAffrontement(Joueur a, Joueur b){
+        indicationJoueur.remove(affrontement);
+        affrontement = new JLabel(a.getPseudo() + " contre " + b.getPseudo(), JLabel.CENTER);
+        affrontement.setFont(new Font(affrontement.getName(), Font.PLAIN, affrontement.getFont().getSize()*2));
+        indicationJoueur.add(affrontement, BorderLayout.NORTH);
+        indicationJoueur.setOpaque(false);
+    
     }
     public void joueurActif(Joueur j){
         //À toi de jouer !
@@ -153,6 +164,7 @@ public class VueGrille extends Observable{
     }
     
     public void tableauVictoire(ArrayList<Joueur> j, int nombrejoueurs){
+        if (tour2==0){
         JLabel tab = new JLabel("Tableau des victoires", JLabel.CENTER);
         panelTableau = new JPanel(new BorderLayout());
         panelTableau.add(tab, BorderLayout.NORTH);
@@ -164,19 +176,37 @@ public class VueGrille extends Observable{
         tableauDroite = new JPanel(new GridLayout(nombrejoueurs, 1));
         panelTableau.add(tableauDroite, BorderLayout.EAST);
         tableauDroite.setOpaque(false);
+        
+        }
         Collections.sort(j);
         for(int i =0; i < j.size(); i++){
             if (tour2!=0){
-                tableauGauche.remove(affichJoueur);
+                panelTableau.remove(tableauGauche);
             }
-                affichJoueur = new JLabel(j.get(i).getPseudo());
-                tableauGauche.add(affichJoueur, JLabel.CENTER);
+            if (i==0){
+                tableauGauche = new JPanel(new GridLayout(nombrejoueurs, 1));}
+                nomJoueur = new JLabel(j.get(i).getPseudo());
+                tableauGauche.add(nomJoueur);
+                tableauGauche.setOpaque(false);
 //            if (tour2!=0){
 //                tableauDroite.remove(nbptsJoueur);
 //            }
 //                nbptsJoueur = new JLabel(""+j.get(i).getPoints(), JLabel.WEST);
 //                tableauDroite.add(nbptsJoueur);
         }
+        panelTableau.add(tableauGauche,BorderLayout.CENTER);
+        for (int i=0;i<j.size();i++){
+            if(tour2!=0){
+                panelTableau.remove(tableauDroite);
+            }
+            if (i==0){
+            tableauDroite = new JPanel(new GridLayout(nombrejoueurs, 1));}
+            String point = String.valueOf(j.get(i).getPoints());
+            pointJoueur = new JLabel(point);
+            tableauDroite.add(pointJoueur);
+            tableauDroite.setOpaque(false);
+        }
+        panelTableau.add(tableauDroite, BorderLayout.EAST);
         tour2 = tour2+1;
     }
     
