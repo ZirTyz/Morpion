@@ -185,7 +185,7 @@ public class VueGrille extends Observable{
             }
             if (i==0){
                 tableauGauche = new JPanel(new GridLayout(nombrejoueurs, 1));}
-                nomJoueur = new JLabel(j.get(i).getPseudo());
+                nomJoueur = new JLabel(i+1+" - " + j.get(i).getPseudo());
                 tableauGauche.add(nomJoueur);
                 tableauGauche.setOpaque(false);
 //            if (tour2!=0){

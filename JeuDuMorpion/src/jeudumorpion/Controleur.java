@@ -107,12 +107,7 @@ public class Controleur implements Observer{
             
             /****************   Procédure pour recommencer un DUEL   ****************/
             if(((Message) arg).getAction()== Actions.REMATCH){
-                for (int i = 0; i<duel.size();i++){
-                    System.out.println(duel.get(i).getPseudo() + " " + duel.get(i).getPoints());
-                }
-                for (int i = 0; i<joueursScore.size();i++){ 
-                    System.out.println(joueursScore.get(i).getPseudo() + " " + joueursScore.get(i).getPoints());
-                }
+                
                 
                 duel.set(0, duel.get(1));
                 duel.set(1, joueurCourant);
