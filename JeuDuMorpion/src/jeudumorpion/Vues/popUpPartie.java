@@ -33,7 +33,6 @@ public class popUpPartie extends Observable{
     frame = new JFrame("Gagnant");
     frame.setSize(400, 100);  
     frame.setLocationRelativeTo(null);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
     frame.setUndecorated(true);
     mainPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
@@ -73,6 +72,6 @@ public class popUpPartie extends Observable{
     }
     
     public void fermer(){
-        this.frame.setVisible(false);
+        this.frame.dispose();
     }
   }

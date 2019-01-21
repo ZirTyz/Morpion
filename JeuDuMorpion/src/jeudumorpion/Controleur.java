@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.text.StyledEditorKit;
 import jeudumorpion.Vues.RegleDuJeu;
 import jeudumorpion.Vues.VueInformationsJoueurs;
 import jeudumorpion.Vues.popUpDuel;
@@ -36,27 +37,27 @@ import jeudumorpion.utilitaires.MessageInfosJoueurs;
  * @author chapellr
  */
 public class Controleur implements Observer{
-   //private Grille grille = new Grille();
+
     private ArrayList<Joueur> duel = new ArrayList<>();
-   //private HashMap<Joueur,Integer> joueurs = new HashMap<>();
+
    private ArrayList<Joueur> joueurs = new ArrayList<>();
    private ArrayList<Joueur> joueursScore = new ArrayList<>();
    private VueGrille vueGrille;
-   private VueAccueil vueSelection;
+   private VueAccueil vueAccueil;
    private VueSpecificationNbJoueurs vueSpe;
    private Grille grille = new Grille();
    private int nbCaseCoche=0;
    private Joueur joueurCourant; // joueur qui joue
    private Joueur joueurAttaquant; //joueur qui commence
    private popUpPartie victoire;
-   private popUpDuel victoire2;
+   private popUpDuel victoireDuel;
    private popUpTournois victoireTourn;
    private VueInformationsJoueurs vueInfo;
    private int nbj;
    private int tousJoueurs =0;
    private int jChoisie =0;
    private int joueursPatieCourante =0;
-   private int nbTours = 0;
+   private boolean revanche = false;
    private Color fond;
    private int nbMatch=0;
    private RegleDuJeu regle;
@@ -64,11 +65,11 @@ public class Controleur implements Observer{
    public Controleur(){
        //fond = new Color(179, 204, 255);
        
-       vueSelection=new VueAccueil();
+       vueAccueil=new VueAccueil();
        setFond(new Color(77, 149, 145));
-        vueSelection.setBackgroundColorAcceuil(fond);
-       vueSelection.afficher();
-       vueSelection.addObserver(this);
+       vueAccueil.setBackgroundColorAcceuil(fond);
+       vueAccueil.afficher();
+       vueAccueil.addObserver(this);
 
    }
     @Override
@@ -82,7 +83,7 @@ public class Controleur implements Observer{
                 vueSpe = new VueSpecificationNbJoueurs(fond);
                 vueSpe.afficher();
                 vueSpe.addObserver(this);
-                vueSelection.fermer();
+                vueAccueil.fermer();
             }
             
             
@@ -94,8 +95,9 @@ public class Controleur implements Observer{
             
             /****************   Retour à l'acceuil   ****************/
             if(((Message) arg).getAction()== Actions.ACCUEIL){
-               vueSelection.afficher();
-               vueSelection.addObserver(this);
+               vueAccueil.afficher();
+               vueAccueil.addObserver(this);
+               vueGrille.fermer();
             }
             
             
@@ -114,7 +116,7 @@ public class Controleur implements Observer{
                 joueurAttaquant = duel.get(0);
                 resetGrilles();
 
-                this.victoire2.fermer();
+                this.victoireDuel.fermer();
 
                 
             }
@@ -122,10 +124,23 @@ public class Controleur implements Observer{
             
             /****************   Changement de match dans un CHAMPIONNAT   ****************/
             if(((Message) arg).getAction()== Actions.MATCHSUIVANT){
-//                if revanche non faite
-                this.tournois(joueurs);
-                resetGrilles();
-                vueGrille.setAffrontement(duel.get(0), duel.get(1));
+                if(revanche){     
+                    revanche =false;
+                    this.tournois(joueurs);
+                    resetGrilles();
+                    vueGrille.setAffrontement(duel.get(0), duel.get(1));
+                    victoireTourn.fermer();
+               }
+                else {
+                    revanche= true;
+                    duel.set(0, duel.get(1));
+                    duel.set(1, joueurCourant);
+                    joueurAttaquant = duel.get(0);
+                    resetGrilles();
+                    victoireTourn.fermer();
+                
+                    
+                }
             }
             
             
@@ -133,18 +148,18 @@ public class Controleur implements Observer{
             if(message.getAction()== Actions.COLOR_COLOREE){
                 //fond = new Color(179, 204, 255);
                 setFond(new Color(239, 125, 49));
-                vueSelection.setBackgroundColorAcceuil(fond);
-                vueSelection.getSombre().setEnabled(true);
-                vueSelection.getColore().setEnabled(false);
+                vueAccueil.setBackgroundColorAcceuil(fond);
+                vueAccueil.getSombre().setEnabled(true);
+                vueAccueil.getColore().setEnabled(false);
                 
             }
             
             if(message.getAction()== Actions.COLOR_SOMBRE){
                 
                 setFond(new Color(77, 149, 145));
-                vueSelection.setBackgroundColorAcceuil(fond);
-                vueSelection.getSombre().setEnabled(false);
-                vueSelection.getColore().setEnabled(true);
+                vueAccueil.setBackgroundColorAcceuil(fond);
+                vueAccueil.getSombre().setEnabled(false);
+                vueAccueil.getColore().setEnabled(true);
                 
             }
             /************************************************************************/
@@ -152,7 +167,7 @@ public class Controleur implements Observer{
             if(message.getAction()== Actions.REGLE){
                 regle = new RegleDuJeu();
                 regle.afficher();
-                vueSelection.fermer();
+                vueAccueil.fermer();
             }
 
             
@@ -201,7 +216,7 @@ public class Controleur implements Observer{
             vueGrille.afficher();
             vueGrille.addObserver(this);
             vueInfo.fermer();
-            nbTours = nbTours+1;
+            
             
             }
         }
@@ -246,9 +261,9 @@ public class Controleur implements Observer{
                                 joueurCourant.addPoint(2);
                             }
                             else joueurCourant.addPoint(3);
-                            victoire2 = new popUpDuel(joueurCourant);
-                            victoire2.afficher();
-                            victoire2.addObserver(this);
+                            victoireDuel = new popUpDuel(joueurCourant);
+                            victoireDuel.afficher();
+                            victoireDuel.addObserver(this);
                             
                             
                             
@@ -268,16 +283,16 @@ public class Controleur implements Observer{
                        // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3);
 //                       vueGrille.fermer();
                         
-                        if(nbTours == (nbj - 1)){
+                        if(!revanche){
                             if(nbj == 2){
                                 // Ajout des points
                                 if (joueurAttaquant==joueurCourant){
                                 joueurCourant.addPoint(2);
                                 }
                                 else joueurCourant.addPoint(3);
-                                victoire2 = new popUpDuel(joueurCourant);
-                                victoire2.afficher();
-                                victoire2.addObserver(this);
+                                victoireDuel = new popUpDuel(joueurCourant);
+                                victoireDuel.afficher();
+                                victoireDuel.addObserver(this);
                                 vueGrille.tableauVictoire(joueursScore, nbj);
                                 
                                 
@@ -299,7 +314,7 @@ public class Controleur implements Observer{
                         victoire = new popUpPartie(joueurCourant);
                         victoire.afficher();
                         victoire.addObserver(this);
-//                        y = y+2;
+
 
                         
                         }    
@@ -359,11 +374,13 @@ public class Controleur implements Observer{
     }
    
     public void initTournois(ArrayList<Joueur> joueurs){
-//      
-        for(int x = 0;x<joueurs.size()-1;x++){
-            joueurs.get(x).ajouterJ(joueurs.get(x+1));
+//  
+        for(int y=0;y<joueurs.size()-1;y++){
+            for(int x = 1;y+x<joueurs.size();x++){
+                joueurs.get(y).ajouterJ(joueurs.get(y+x));
+                System.out.println("jeudumorpion.Controleur.initTournois()");
+            }
         }
-
     }
     
     public void melangeTournois(ArrayList<Joueur> joueurs){
@@ -373,9 +390,11 @@ public class Controleur implements Observer{
        
     }
     public void tournois(ArrayList<Joueur> j){ // problème !!!
-        if (j.get(0).getJoueurA()!=null){
+        System.out.println(j.get(0).getJoueurA().size());
+        if (j.get(0).getJoueurA().size()!=0){
+            
             if (jChoisie!=nbj){
-                if(j.get(jChoisie).getJoueurA() !=null){
+                if(!(j.get(jChoisie).getJoueurA().isEmpty())){
                     duel.clear();
                     duel.add(j.get(jChoisie));
                     duel.add(j.get(jChoisie).getJoueurA().get(0));
@@ -384,7 +403,9 @@ public class Controleur implements Observer{
                     joueurCourant =duel.get(0);
                     joueurAttaquant =duel.get(0);
                     j.get(jChoisie).getJoueurA().remove(0);
+                    System.out.println(duel.get(0).getPseudo());
                     jChoisie=jChoisie+1;
+                    
                 } else {
                     jChoisie=jChoisie+1;
                     this.tournois(j);

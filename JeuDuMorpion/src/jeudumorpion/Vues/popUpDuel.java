@@ -31,7 +31,6 @@ public class popUpDuel extends Observable {
     frame = new JFrame("Gagnant du Duel");
     frame.setSize(400, 100);  
     frame.setLocationRelativeTo(null);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
     frame.add(mainPanel);
     frame.setUndecorated(true);

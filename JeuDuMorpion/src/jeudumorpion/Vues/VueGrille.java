@@ -55,7 +55,7 @@ public class VueGrille extends Observable{
         this.fond = fond;
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(1000, 500);
+        window.setSize(1400, 800);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
  
@@ -75,10 +75,16 @@ public class VueGrille extends Observable{
         
         JButton retour = new JButton("Retour");
         panelHaut.add(retour, BorderLayout.WEST);
-        retour.setContentAreaFilled(false);
+//        retour.setContentAreaFilled(false);
         retour.setBorderPainted(false);
         retour.setFocusPainted(false);
-        
+        retour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new Message(Actions.ACCUEIL));
+            }
+        });
         //Marge autour des cases du morpion
 
         

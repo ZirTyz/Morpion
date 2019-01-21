@@ -51,7 +51,7 @@ public class VueInformationsJoueurs extends Observable{
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Informations");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(500, 800);
+        window.setSize(1000, 800);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -133,13 +133,18 @@ public class VueInformationsJoueurs extends Observable{
                 clearChanged();
             }
         });
-        JPanel panelBas = new JPanel(new GridLayout(1, 5));
+        JPanel panelBas = new JPanel(new GridLayout(1, 9));
         panelBas.setOpaque(false);
-        panelBas.add(new JLabel(""));
-        panelBas.add(new JLabel(""));
-        panelBas.add(valider);
-        panelBas.add(new JLabel(""));
-        panelBas.add(new JLabel(""));
+        for(int x =0; x<9;x++){
+            if (x==4){
+                panelBas.add(valider);
+            }
+            else {
+               panelBas.add(new JLabel("")); 
+            }
+        }
+        
+
         
         JPanel panelMarge = new JPanel();
         panelMarge.setOpaque(false);

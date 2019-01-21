@@ -32,8 +32,8 @@ public class VueAccueil extends Observable{
     private final JFrame window;
     private final JButton btnNewPartie;
     private final JButton btnTableauS;
-    private final JButton btnTuto;
-    private final JButton btnCreation;
+    private final JButton btnRegles;
+    private final JButton btnSolo;
     private JButton sombre;
     private JButton colore;
     private JPanel mainPanel;
@@ -42,7 +42,7 @@ public class VueAccueil extends Observable{
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         // Définit la taille de la fenêtre en pixels
-        window.setSize(600, 400);
+        window.setSize(1000, 800);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
         
@@ -65,8 +65,8 @@ public class VueAccueil extends Observable{
         mainPanel.add(menu,BorderLayout.CENTER);
         menu.setOpaque(false);
         //menuHaut parti
-        JPanel menuHaut = new JPanel(new GridLayout(5,3));
-        menu.add(menuHaut,BorderLayout.NORTH);
+        JPanel menuHaut = new JPanel(new GridLayout(9,3));
+        menu.add(menuHaut,BorderLayout.CENTER);
         menuHaut.setOpaque(false);
         btnNewPartie = new JButton("Nouvelle Partie");
         btnNewPartie.addActionListener(new ActionListener() {
@@ -78,22 +78,8 @@ public class VueAccueil extends Observable{
             }
         });
         btnTableauS = new JButton("Tableau des Scores");
-        for(int x =0; x<15;x++){
-            if (x==4){
-                menuHaut.add(btnNewPartie);
-            }
-            else if(x==10){
-                menuHaut.add(btnTableauS);                
-            }
-            else {
-                menuHaut.add(new JLabel(""));
-            }
-        }
-        JPanel menuBas =new JPanel(new GridLayout(5,5));
-        menu.add(menuBas, BorderLayout.CENTER);
-        menuBas.setOpaque(false);
-        btnTuto = new JButton("Règles");
-        btnTuto.addActionListener(new ActionListener() {
+        btnRegles = new JButton("Règles");
+        btnRegles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setChanged();
@@ -101,18 +87,39 @@ public class VueAccueil extends Observable{
                 clearChanged();
             }
         });
-        btnCreation = new JButton("Création");
-        for (int x=0;x<25;x++){
-            if (x==1){
-                menuBas.add(btnTuto);
+        btnSolo = new JButton("Jouer seul");
+        for(int x =0; x<27;x++){
+            if (x==4){
+                menuHaut.add(btnNewPartie);
             }
-            else if(x==3){
-                menuBas.add(btnCreation);
+            else if(x==10){
+                menuHaut.add(btnTableauS);                
             }
-            else{
-                menuBas.add(new JLabel(""));
+            else if(x==16){
+                menuHaut.add(btnSolo);                
+            }
+            else if(x==22){
+                menuHaut.add(btnRegles);                
+            }
+            else {
+                menuHaut.add(new JLabel(""));
             }
         }
+//        JPanel menuBas =new JPanel(new GridLayout(5,5));
+//        menu.add(menuBas, BorderLayout.CENTER);
+//        menuBas.setOpaque(false);
+        
+//        for (int x=0;x<25;x++){
+//            if (x==1){
+//                menuBas.add(btnRegles);
+//            }
+//            else if(x==3){
+//                menuBas.add(btnSolo);
+//            }
+//            else{
+//                menuBas.add(new JLabel(""));
+//            }
+//        }
                 JPanel panelBas = new JPanel(new GridLayout(3,6)) ;
                 panelBas.setOpaque(false);
         menu.add(panelBas, BorderLayout.SOUTH);
@@ -158,7 +165,7 @@ public class VueAccueil extends Observable{
         this.getWindow().setVisible(true);
     }
     public void fermer(){
-        this.getWindow().setVisible(false);
+        this.getWindow().dispose();
     }
 
     public void setBackgroundColorAcceuil(Color couleur){

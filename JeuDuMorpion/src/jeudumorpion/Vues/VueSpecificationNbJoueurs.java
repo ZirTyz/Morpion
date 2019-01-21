@@ -43,7 +43,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         //Création de la fenêtre + séparation en différent layout
         window = new JFrame("Morpion");
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(1000, 500);
+        window.setSize(1000, 800);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -136,7 +136,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientdeux.setBorderPainted(false);
         contientdeux.setFocusPainted(false);
         contientdeux.setContentAreaFilled(false);
-        contientdeux.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/double.png"));
+        contientdeux.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/double.png"));
         selectNbJoueurs.add(contientdeux);
         selectNbJoueurs.add(two);
         two.setSelected(true);
@@ -145,7 +145,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientcinq.setBorderPainted(false);
         contientcinq.setFocusPainted(false);
         contientcinq.setContentAreaFilled(false);
-        contientcinq.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Quintuple.png"));
+        contientcinq.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/Quintuple.png"));
         selectNbJoueurs.add(contientcinq);       
         selectNbJoueurs.add(five);
         
@@ -153,7 +153,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contienttrois.setBorderPainted(false);
         contienttrois.setFocusPainted(false);
         contienttrois.setContentAreaFilled(false);
-        contienttrois.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/triple.png"));
+        contienttrois.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/triple.png"));
         selectNbJoueurs.add(contienttrois);
         selectNbJoueurs.add(three);
         
@@ -162,7 +162,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientsix.setBorderPainted(false);
         contientsix.setFocusPainted(false);
         contientsix.setContentAreaFilled(false);
-        contientsix.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Sextuple.png"));
+        contientsix.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/Sextuple.png"));
         selectNbJoueurs.add(contientsix);       
         selectNbJoueurs.add(six);
         
@@ -171,7 +171,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientquatre.setBorderPainted(false);
         contientquatre.setFocusPainted(false);
         contientquatre.setContentAreaFilled(false);
-        contientquatre.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Quadruple.png"));
+        contientquatre.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/Quadruple.png"));
         selectNbJoueurs.add(contientquatre);       
         selectNbJoueurs.add(four);
         
@@ -180,7 +180,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contientsept.setBorderPainted(false);
         contientsept.setFocusPainted(false);
         contientsept.setContentAreaFilled(false);
-        contientsept.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/Septuple.png"));
+        contientsept.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/Septuple.png"));
         selectNbJoueurs.add(contientsept); 
         selectNbJoueurs.add(seven);
         
@@ -191,7 +191,7 @@ public class VueSpecificationNbJoueurs extends Observable{
         contienthuit.setBorderPainted(false);
         contienthuit.setFocusPainted(false);
         contienthuit.setContentAreaFilled(false);
-        contienthuit.setIcon(new ImageIcon("/home/rose/NetBeansProjects/Morp/morpi/Morpion/JeuDuMorpion/src/jeudumorpion/Vues/imagesJoueurs/hectuple.png"));
+        contienthuit.setIcon(new ImageIcon(System.getProperty("user.dir")+"/src/jeudumorpion/Vues/imagesJoueurs/hectuple.png"));
         selectNbJoueurs.add(contienthuit);         
         selectNbJoueurs.add(eight);
         

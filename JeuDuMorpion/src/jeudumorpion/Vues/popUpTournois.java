@@ -32,7 +32,6 @@ public class popUpTournois extends Observable{
     frame = new JFrame("Gagnant du Tournoi");
     frame.setSize(400, 100);  
     frame.setLocationRelativeTo(null);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
     frame.add(mainPanel);
     frame.setUndecorated(true);
@@ -72,6 +71,6 @@ public class popUpTournois extends Observable{
         this.frame.setVisible(true);
     }
         public void fermer(){
-        this.frame.setVisible(false);
+        this.frame.dispose();
     }
   }
