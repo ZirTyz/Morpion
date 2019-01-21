@@ -251,7 +251,7 @@ public class Controleur implements Observer{
                     setNbCaseCoche(getNbCaseCoche()+1);
                 
                 if (getNbCaseCoche()==9){
-                    
+                    vueGrille.deleteObserver(this);
                     if(joueurs.size()==2){
                         
                         // VICTOIRE //
@@ -282,7 +282,7 @@ public class Controleur implements Observer{
                     if(grille.Gagnant(joueurCourant.getSigne())){
                        // joueurs.replace(joueurCourant, joueurs.get(joueurCourant)+3);
 //                       vueGrille.fermer();
-                        
+                        vueGrille.deleteObserver(this);
                         if(!revanche){
                             if(nbj == 2){
                                 // Ajout des points
