@@ -78,6 +78,14 @@ public class VueAccueil extends Observable{
             }
         });
         btnTableauS = new JButton("Tableau des Scores");
+        btnTableauS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setChanged();
+                notifyObservers(new Message(Actions.TABLEAU));
+                clearChanged();
+            }
+        });
         btnRegles = new JButton("Règles");
         btnRegles.addActionListener(new ActionListener() {
             @Override

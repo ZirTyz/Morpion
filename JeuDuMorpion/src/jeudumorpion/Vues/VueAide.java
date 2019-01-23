@@ -5,6 +5,7 @@
  */
 package jeudumorpion.Vues;
 
+import java.util.Observable;
 import javax.swing.JFrame;
 import jeudumorpion.Controleur;
 
@@ -12,7 +13,7 @@ import jeudumorpion.Controleur;
  *
  * @author Lucas
  */
-public class VueAide {
+public class VueAide extends Observable{
     private JFrame frame;
     
     public VueAide(){
@@ -24,8 +25,6 @@ public class VueAide {
         this.frame.setVisible(true);
     }
 
-    public void addObserver(Controleur aThis) {
-        this.addObserver(aThis);
-    }
+    
     
 }

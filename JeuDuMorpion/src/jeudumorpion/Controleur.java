@@ -29,6 +29,7 @@ import javax.swing.text.StyledEditorKit;
 import jeudumorpion.Vues.RegleDuJeu;
 import jeudumorpion.Vues.VueAide;
 import jeudumorpion.Vues.VueInformationsJoueurs;
+import jeudumorpion.Vues.VueTableau;
 import jeudumorpion.Vues.popUpDuel;
 import jeudumorpion.Vues.popUpPartie;
 import jeudumorpion.Vues.popUpTournois;
@@ -46,6 +47,7 @@ public class Controleur implements Observer{
    private VueGrille vueGrille;
    private VueAccueil vueAccueil;
    private VueSpecificationNbJoueurs vueSpe;
+   private VueTableau tableau;
    private Grille grille = new Grille();
    private int nbCaseCoche=0;
    private Joueur joueurCourant; // joueur qui joue
@@ -92,7 +94,9 @@ public class Controleur implements Observer{
             
             /****************   Procédure de création de tableau Score   ****************/
             if(((Message) arg).getAction()== Actions.TABLEAU){
-//                vueTab = new VueTableau();
+                tableau = new VueTableau(joueurs, fond);
+                tableau.afficher();
+
             }
             
             
@@ -443,7 +447,9 @@ public class Controleur implements Observer{
         }
         else {
             System.out.println("tout les matchs sont fait");
-//            vueTableau tableau = new vueTableau(j);
+            tableau = new VueTableau(j, fond);
+            tableau.afficher();
+            
         }
         
     }
