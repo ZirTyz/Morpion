@@ -194,11 +194,7 @@ public class VueGrille extends Observable{
                 nomJoueur = new JLabel(i+1+" - " + j.get(i).getPseudo());
                 tableauGauche.add(nomJoueur);
                 tableauGauche.setOpaque(false);
-//            if (tour2!=0){
-//                tableauDroite.remove(nbptsJoueur);
-//            }
-//                nbptsJoueur = new JLabel(""+j.get(i).getPoints(), JLabel.WEST);
-//                tableauDroite.add(nbptsJoueur);
+
         }
         panelTableau.add(tableauGauche,BorderLayout.CENTER);
         for (int i=0;i<j.size();i++){

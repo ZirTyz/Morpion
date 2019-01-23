@@ -27,9 +27,10 @@ import jeudumorpion.utilitaires.Message;
  * @author rose
  */
 public class popUpPartie extends Observable{
+    private JLabel nmGagnant;
     private JFrame frame;
     
-    public popUpPartie(Joueur j){
+    public popUpPartie(Joueur j, boolean bool){
     frame = new JFrame("Gagnant");
     frame.setSize(400, 100);  
     frame.setLocationRelativeTo(null);
@@ -37,8 +38,9 @@ public class popUpPartie extends Observable{
     frame.setUndecorated(true);
     mainPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
     frame.add(mainPanel);
-    JLabel nmGagnant = new JLabel("Le gagnant de la partie est : " + j.getPseudo(), JLabel.CENTER);
-    
+    if (bool)
+    nmGagnant = new JLabel("Le gagnant de la partie est : " + j.getPseudo(), JLabel.CENTER);
+    else nmGagnant = new JLabel("EGALITE personne n'a gagné", JLabel.CENTER);
     mainPanel.add(nmGagnant, BorderLayout.CENTER);
     JButton retour = new JButton("Retour page d'acceuil");
     JButton suivant = new JButton("Prochain contre");

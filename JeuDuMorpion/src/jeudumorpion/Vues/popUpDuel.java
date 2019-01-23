@@ -25,9 +25,11 @@ import jeudumorpion.utilitaires.Message;
  * @author rose
  */
 public class popUpDuel extends Observable {
-   private JFrame frame;
+    private JLabel nmGagnant;
+    private JFrame frame;
     
-    public popUpDuel(Joueur j){
+    public popUpDuel(Joueur j, boolean bool){
+        
     frame = new JFrame("Gagnant du Duel");
     frame.setSize(400, 100);  
     frame.setLocationRelativeTo(null);
@@ -35,9 +37,10 @@ public class popUpDuel extends Observable {
     frame.add(mainPanel);
     frame.setUndecorated(true);
     mainPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
-    
-    JLabel nmGagnant = new JLabel("Le gagnant du duel est : " + j.getPseudo(), JLabel.CENTER);
-    
+    if (bool){
+        nmGagnant = new JLabel("Le gagnant du duel est : " + j.getPseudo(), JLabel.CENTER);
+    }
+    else { nmGagnant = new JLabel("EGALITE personne n'a gagné", JLabel.CENTER);}
     mainPanel.add(nmGagnant, BorderLayout.CENTER);
     JButton retour = new JButton("Retour page d'acceuil");
     JButton nvxTournois = new JButton("Nouvelle partie");
